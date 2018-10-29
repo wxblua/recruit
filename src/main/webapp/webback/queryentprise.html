@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <script src="js/jquery-1.9.1.js"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.all.js"></script>
+</head>
+<body>
+    <div id="prise">
+        <table border="1">
+            <tr>
+                <td>公司编号</td>
+                <td>公司所在地址</td>
+                <td>公司名称</td>
+                <td>创始人</td>
+                <td>邮箱</td>
+                <td>联系人电话</td>
+                <td>密码</td>
+                <td>公司类型</td>
+                <td>行业类型</td>
+                <td>公司规模</td>
+                <td>当前状态</td>
+                <td>证书</td>
+                <td>编辑</td>
+            </tr>
+            <tr v-for="e in msg">
+                <td>{{e.epid}}</td>
+                <td>{{e.cyaddress}}</td>
+                <td>{{e.epname}}</td>
+                <td>{{e.originator}}</td>
+                <td>{{e.epemail}}</td>
+                <td>{{e.epphone}}</td>
+                <td>{{e.eppwd}}</td>
+                <td>{{e.ctypeid}}</td>
+                <td>{{e.itypeid}}</td>
+                <td>{{e.cpcaleid}}</td>
+                <td>{{e.epstate}}</td>
+                <td><img :src="'../backstageone/'+e.companyimage" height="100"width="200"/></td>
+                <td>
+                    <input type="button" @click="compile(e.epid)" value="通过">
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+<script>
+    new Vue({
+        el:'#prise',
+        data:{
+            msg:[]
+        },
+        //回调，获取值
+        created:function () {
+            var admins=this;
+            $.ajax({
+                url:"http://localhost:8080/recruit/enterprise/queryent",
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    admins.msg=data
+                }
+            });
+        },
+        methods:{
+            compile(index){
+                $.ajax({
+                    url : "../enterprise/updateEpstate",
+                    type : "post",
+                    data : {
+                        epid : index
+                    },
+                    dataType : "json",
+                    success : function(data) {
+                        if (data) {
+                            layui.use('layer', function(){
+                                layer.msg('已通过',{icon: 6});
+                            });
+                            location.reload(true);
+                        } else {
+                            layui.use('layer', function(){
+                                layer.msg('未通过',{icon: 6});
+                            });
+                        }
+                    }
+                });
+            }
+        }
+    })
+</script>
+</html>

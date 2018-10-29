@@ -1,0 +1,118 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<script id="allmobilize" charset="utf-8" src="style/js/allmobilize.min.js"></script>
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="alternate" media="handheld"  />
+<!-- end 云适配 -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>注册-XX账号</title>
+	<link rel="Shortcut Icon" href="h/images/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="../reception/style/css/style.css"/>
+	<script src="../reception/style/js/jquery.1.10.1.min.js"></script>
+	<script  src="../reception/style/js/jquery.lib.min.js"></script>
+	<script src="../reception/style/js/core.min.js"></script>
+	<!--<script src="style/js/conversion.js"></script>-->
+
+</head>
+
+<body id="login_bg">
+	<div class="login_wrapper">
+		<div class="login_header">
+        	<a href="h/"><img src="../reception/style/images/logo_white.png" width="285" height="62" alt="拉勾招聘" /></a>
+            <div id="cloud_s"><img src="../reception/style/images/cloud_s.png" width="81" height="52" alt="cloud" /></div>
+            <div id="cloud_m"><img src="../reception/style/images/cloud_m.png" width="136" height="95"  alt="cloud" /></div>
+        </div>
+        
+    	<input type="hidden" id="resubmitToken" value="9b207beb1e014a93bc852b7ba450db27" />		
+		<div class="login_box">
+        	<form id="loginForm">
+            	<input type="text" id="email" name="email" tabindex="2" placeholder="请输入常用邮箱地址" />
+                <span class="error" style="display:none;" id="beError"></span>
+                <input type="password" id="password" name="password" tabindex="3" placeholder="请输入密码" />
+            	<label class="fl registerJianJu" for="checkbox">
+					<input type="checkbox" id="checkbox" name="checkbox" checked  class="checkbox valid" />我已阅读并同意<a href="h/privacy.html" target="_blank">《拉勾用户协议》</a>
+           		</label>
+				<input type="submit" id="submitLogin" value="注册"/>
+            </form>
+            <div class="login_right">
+            	<div>已有XX帐号</div>
+            	<a href="login.html" class="registor_now">直接登录</a>
+                <div class="login_others">使用以下帐号直接登录:</div>
+    <!--            <a  href="h/ologin/auth/sina.html"  target="_blank" class="icon_wb" title="使用新浪微博帐号登录"></a>
+               	<a  href="h/ologin/auth/qq.html"  class="icon_qq" target="_blank" title="使用腾讯QQ帐号登录" ></a>
+          -->  </div>
+        </div>
+        <div class="login_box_btm"></div>
+    </div>
+
+    <script type="text/javascript">
+    $(document).ready(function(e) {
+    	$('.register_radio li input').click(function(e){
+    		$(this).parent('li').addClass('current').append('<em></em>').siblings().removeClass('current').find('em').remove();
+    	});
+    	
+    	$('#email').focus(function(){
+    		$('#beError').hide();
+    	});
+    	//验证表单
+	    	 $("#loginForm").validate({
+	    	        rules: {
+						uname:{
+                            required: true
+						},
+			    	   	email: {
+			    	    	required: true,
+			    	    	email: true
+			    	   	},
+			    	   	password: {
+			    	    	required: true,
+			    	    	rangelength: [6,16]
+			    	   	},
+			    	   	checkbox:{required:true}
+			    	},
+			    	messages: {
+			    		uname:{
+	    	        		required:"请输入您的账号"
+	    	        	},
+			    	 	email: {
+			    	    	required: "请输入常用邮箱地址",
+			    	    	email: "请输入有效的邮箱地址，如：vivi@lagou.com"
+			    	   	},
+			    	   	password: {
+			    	    	required: "请输入密码",
+			    	    	rangelength: "请输入6-16位密码，字母区分大小写"
+			    	   	},
+			    	   	checkbox: {
+			    	    	required: "请接受XX用户协议"
+			    	   	}
+			    	},
+			    	errorPlacement:function(label, element){
+			    		if(element.attr("type") == "radio"){
+			    			label.insertAfter($(element).parents('ul')).css('marginTop','-20px');
+			    		}else if(element.attr("type") == "checkbox"){
+			    			label.insertAfter($(element).parent()).css('clear','left');
+			    		}else{
+			    			label.insertAfter(element);
+			    		};	
+			    	},
+			    	submitHandler:function(form){
+			    		var email =$('#email').val();
+			    		var password =$('#password').val();
+                        var uname =$('#uname').val();
+						$.post("../user/logAdd",{email:email,password:password},function (data) {
+							if(data == 1){
+							    alert("成功")
+							}else if(data == 2){
+							    alert("失败")
+							}else{
+							    alert("该邮箱已拥有,请登录")
+							}
+
+                        })
+			        }
+	    	});
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<form id="fm">
+    <div id="abc">
+        <input type="hidden" :value="msg[0].wid" name="wid"/>
+        <table cellspacing="0" cellpadding="0" border="1" style="text-align: center">
+            <caption>修改密码</caption>
+            <tr>
+                <td>当前用户</td>
+                <td><span v-text="msg[0].wname"></span></td>
+            </tr>
+            <tr>
+                <td>请输入新密码</td>
+                <td><input type="password" name="wpwd"></td>
+            </tr>
+        </table>
+    </div>
+</form>
+<a id="sub">提交</a>
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#abc',
+        data: {
+            msg: []
+        },
+        //回调,获取值
+        created: function () {
+            var admins = this;
+            $.ajax({
+                url: "http://localhost:8080/recruit/login/queryback",
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    admins.msg = data;
+                }
+            });
+        }
+    })
+
+    $(function () {
+        $('#sub').click(function () {
+            $.ajax({
+                url: "http://localhost:8080/recruit/login/updateweb",
+                type: "post",
+                data: $('#fm').serialize(),
+                dataType: "json",
+                success: function (data) {
+                    if (data == true) {
+                        alert("修改成功！")
+                        parent.location.href = 'webback/login.html';
+                    }
+                }
+            });
+        })
+    })
+</script>
+
+</body>
+</html>

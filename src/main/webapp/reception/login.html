@@ -1,0 +1,128 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<script id="allmobilize" charset="utf-8" src="../reception/style/js/allmobilize.min.js"></script>
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="alternate" media="handheld"  />
+
+<title>登录-XX网-最专业招聘平台</title>
+
+<script type="text/javascript">
+var ctx = "h";
+console.log(1);
+</script>
+<link rel="Shortcut Icon" href="../reception/h/images/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../reception/style/css/style.css"/>
+
+<script src="../reception/style/js/jquery.1.10.1.min.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="../reception/style/js/jquery.lib.min.js"></script>
+<script type="text/javascript" src="../reception/style/js/core.min.js"></script>
+
+
+<script type="text/javascript">
+var youdao_conv_id = 271546;
+</script>
+<script type="text/javascript" src="../reception/style/js/conv.js"></script>
+</head>
+
+<body id="login_bg">
+	<div class="login_wrapper">
+		<div class="login_header">
+        	<a href="h/"><img src="../reception/style/images/logo_white.png" width="285" height="62" alt="拉勾招聘" /></a>
+            <div id="cloud_s"><img src="../reception/style/images/cloud_s.png" width="81" height="52" alt="cloud" /></div>
+            <div id="cloud_m"><img src="../reception/style/images/cloud_m.png" width="136" height="95"  alt="cloud" /></div>
+        </div>
+        
+    	<input type="hidden" id="resubmitToken" value="" />		
+		 <div class="login_box">
+        	<form id="loginForm" action="index.html">
+				<input type="text" id="email" name="email" value="" tabindex="1" placeholder="请输入登录邮箱地址" />
+			  	<input type="password" id="password" name="password" tabindex="2" placeholder="请输入密码" />
+				<span class="error" style="display:none;" id="beError"></span>
+			    <label class="fl" for="remember"><input type="checkbox" id="remember" value="" checked="checked" name="autoLogin" /> 记住我</label>
+			    <a href="reset.html" class="fr" target="_blank">忘记密码？</a>
+			    
+				<input type="submit" id="submitLogin" value="登 &nbsp; &nbsp; 录" />
+				<!--<a style="color:#fff;" href="index.html" class="submitLogin" title="登 &nbsp; &nbsp; 录"/>登 &nbsp; &nbsp; 录</a>-->
+
+			</form>
+			<div class="login_right">
+				<div>还没有拉勾帐号？</div>
+				<a href="register.html" class="registor_now">立即注册</a>
+			    <div class="login_others">使用以下帐号直接登录:</div>
+<!--
+				<a  href="h/ologin/auth/sina.html"  target="_blank" class="icon_wb" title="使用新浪微博帐号登录"></a>
+			    <a  href="h/ologin/auth/qq.html"  class="icon_qq" target="_blank" title="使用腾讯QQ帐号登录"></a>
+			    -->
+			</div>
+        </div>
+        <div class="login_box_btm"></div>
+    </div>
+	<script>
+		$(function(){
+            $.ajax({
+                url:"../user/share",
+                type:"post",
+                dateType:"json",
+                success:function(res){
+                   	$("#email").val(res)
+                }
+            })
+		})
+	</script>
+
+
+<script type="text/javascript">
+$(function(){
+	//验证表单
+	 	$("#loginForm").validate({
+	 		/* onkeyup: false,
+	    	focusCleanup:true, */
+	        rules: {
+	    	   	email: {
+	    	    	required: true,
+	    	    	email: true
+	    	   	},
+	    	   	password: {
+	    	    	required: true
+	    	   	}
+	    	},
+	    	messages: {
+	    	   	email: {
+	    	    	required: "请输入登录邮箱地址",
+	    	    	email: "请输入有效的邮箱地址，如：vivi@lagou.com"
+	    	   	},
+	    	   	password: {
+	    	    	required: "请输入密码"
+	    	   	}
+	    	},
+	    	submitHandler:function(form){
+	    		var email = $('#email').val();
+	    		var password = $('#password').val();
+
+	    		/*$(form).find(":submit").attr("disabled", true);*/
+
+	    		$.ajax({
+					url:"../user/log",
+					type:"post",
+					data:{
+                        email:email,
+						pwd:password
+					},
+					success:function(data){
+						if(data){
+							alert("成功")
+						    window.location.href="index.html"
+						}else{
+						    alert("账号或密码错误")
+						}
+					}
+				})
+
+	        }  
+		});
+})
+</script>
+</body>
+</html>

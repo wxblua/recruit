@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="backstageone/js/vue.min.js"></script>
+    <script src="backstageone/js/vue-resource.min.js"></script>
+    <script src="backstageone/js/jquery-1.9.1.js"></script>
+
+
+</head>
+<body>
+<!--1.办公室文员2.会计3.客服助理4.电话销售5.淘宝客服6.业务销售7.采购主管8.天猫运营-->
+
+<div id="btn">
+
+
+    <div v-for="w in a">
+        <label>岗位职责</label>
+        <p>{{w.stcontent}}</p>
+
+
+        <label>职位要求</label>
+        <p>{{w.ricontent}}</p>
+    </div>
+</div>
+
+<div id="btn2">
+    <table border="1">
+        <tr>
+            <td>招聘信息编号</td>
+            <td>职位类别</td>
+            <td>职位名称</td>
+            <td>工作性质</td>
+            <td>工作地址</td>
+            <td>月薪范围</td>
+            <td>工作年限</td>
+            <td>学历</td>
+            <td>招聘人数</td>
+            <td>公司福利</td>
+            <td>企业用户</td>
+            <td>招聘状态</td>
+        </tr>
+        <tr v-for="z in x">
+            <td v-text="z.infoid"></td>
+            <td v-text="z.jobcgname"></td>
+            <td v-text="z.introduction"></td>
+            <td v-text="z.jobnature"></td>
+            <td v-text="z.workaddress"></td>
+            <td v-text="z.salaryrange"></td>
+            <td v-text="z.ywrange"></td>
+            <td v-text="z.educationname"></td>
+            <td v-text="z.rnumbers"></td>
+            <td v-text="z.cpwelfarename"></td>
+            <td v-text="z.epid"></td>
+            <td v-text="z.restate"></td>
+
+        </tr>
+    </table>
+</div>
+
+
+<script>
+    new Vue({
+        el: "#btn",
+        data: {
+            a: []
+        },
+        created: function () {
+            var q = this;
+            $.ajax({
+                url:"description/queryAll",
+                type: "post",
+                success: function (data) {
+                    q.a = data
+                }
+            })
+        }
+    });
+
+    new Vue({
+        el:"#btn2",
+        data:{
+            x:[]
+        },
+        created:function () {
+            var cc=this;
+            $.ajax({
+                url:"recruitment/queryAllRecruitment",
+                type:"post",
+                success:function (data) {
+                    alert(data)
+                    cc.x=data
+                }
+            })
+        }
+    });
+</script>
+
+
+</body>
+</html>

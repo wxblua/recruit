@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <script src="js/jquery-1.9.1.js"></script>
+</head>
+<body>
+<div id="compla">
+    <table border="1">
+        <tr>
+            <td>投诉编号</td>
+            <td>投诉内容</td>
+            <td>投诉图片</td>
+            <td>投诉时间</td>
+            <td>操作</td>
+        </tr>
+        <tr v-for="c in msg">
+            <td>{{c.cid}}</td>
+            <td>{{c.ccontents}}</td>
+            <td>{{c.cimage}}</td>
+            <td>{{c.ctime}}</td>
+            <td>
+                <a href="#">回复</a>||
+                <input type="button" @click="getindex(c.cid)" value="删除">
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+<script>
+    new Vue({
+        el:'#compla',
+        data:{
+            msg:[]
+        },
+        //回调，获取值
+        created:function () {
+            var admins=this;
+            $.ajax({
+                url:"http://localhost:8080/recruit/complain/querycom",
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    admins.msg=data
+                }
+            });
+        },
+        methods:{
+          getindex(index){
+              $.ajax({
+                  url:"http://localhost:8080/recruit/complain/delcom",
+                  data:{
+                      cid:index
+                  },
+                  type:"post",
+                  success:function (data) {
+                      if(data==true){
+                          alert("删除成功")
+                          window.location.href="webback/queryComplain.html"
+                      }else{
+                          alert("删除失败")
+                      }
+                  }
+              })
+          }
+        },
+    })
+</script>
+</html>

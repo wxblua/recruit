@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <title>
+            阳光成单系统
+        </title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="css/x-admin.css" media="all">
+        <script src="js/vue.min.js"></script>
+        <script src="js/vue-resource.min.js"></script>
+    </head>
+    
+    <body>
+        <div class="x-body">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">职位名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="introduction" id="introduction" required  lay-verify="required" placeholder="如：人力资源经理" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">工作性质</label>
+                    <div class="layui-input-block">
+                        <input name="jobnature" id="1" title="全职" type="radio" checked="" value="1">
+                        <input name="jobnature" id="2" title="兼职" type="radio" value="2">
+                        <input name="jobnature" id="3" title="实习" type="radio" value="3">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">月薪范围</label>
+                        <div class="layui-input-inline">
+                            <select name="srangeid" lay-verify="required" lay-search="" id="srange">
+                                <option value="">直接选择或搜索选择</option>
+                                <option v-for="(srangeAlias,index) in srangeParam" v-bind:value="index+1">{{srangeAlias.salaryrange}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">最低学历</label>
+                        <div class="layui-input-inline">
+                            <select name="educationid" lay-verify="required" lay-search="" id="education">
+                                <option value="">直接选择或搜索选择</option>
+                                <option v-for="(educationAlias,index) in educationParam" v-bind:value="index+1">{{educationAlias.educationname}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">工作年限</label>
+                        <div class="layui-input-inline">
+                            <select name="ywrangeid" lay-verify="required" lay-search="" id="yearsworking">
+                                <option value="">直接选择或搜索选择</option>
+                                <option v-for="(yearsworkingAlias,index) in yearsworkingParam" v-bind:value="index+1">{{yearsworkingAlias.ywrange}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">职位类别</label>
+                        <div class="layui-input-inline">
+                            <select name="jobcgid" lay-verify="required" lay-search="" id="jobcategory">
+                                <option value="">直接选择或搜索选择</option>
+                                <option v-for="(jobcategoryAlias,index) in jobcategoryParam" v-bind:value="index+1">{{jobcategoryAlias.jobcgname}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">公司福利</label>
+                        <div class="layui-input-inline">
+                            <select name="cpwelfareid" lay-verify="required" lay-search="" id="cpwelfare">
+                                <option value="">直接选择或搜索选择</option>
+                                <option v-for="(cpwelfareAlias,index) in cpwelfareParam" v-bind:value="index+1">{{cpwelfareAlias.cpwelfarename}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">职位描述</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" class="layui-textarea" id="jobdescription " name="jobdescription"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">招聘人数</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="rnumbers" id="rnumbers" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+
+
+
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                    </label>
+                    <button  class="layui-btn" lay-filter="add" lay-submit="">保存</button>
+                </div>
+            </form>
+        </div>
+        <script src="lib/layui/layui.js" charset="utf-8">
+        </script>
+        <script src="js/x-layui.js" charset="utf-8">
+        </script>
+        <script>
+            layui.use(['form','layer'], function(){
+                $ = layui.jquery;
+              var form = layui.form()
+              ,layer = layui.layer;
+            
+              
+              //监听提交
+              form.on('submit(add)', function(data){
+                console.log(data);
+                //发异步，把数据提交给php
+                layer.alert("增加成功", {icon: 6},function () {
+                    // 获得frame索引
+                    var index = parent.layer.getFrameIndex(window.name);
+                    //关闭当前frame
+                    parent.layer.close(index);
+                });
+                return false;
+              });
+              
+              
+            });
+        </script>
+
+        <script>
+            /*月薪范围*/
+            new Vue({
+                el:"#srange",
+                data:{
+                    srangeParam:[],
+                },
+                created:function(){
+                    var srangeAlias=this;
+                    $.ajax({
+                        url:"../recruitment/querysrange",
+                        type:"post",
+                        dataType:"json",
+                        success:function (data) {
+                            srangeAlias.srangeParam=data
+                            console.log(data)
+                        }
+                    })
+                }
+            })
+            /*工作年限*/
+            new Vue({
+                el:"#yearsworking",
+                data:{
+                    yearsworkingParam:[]
+                },
+                created:function(){
+                    var yearsworkingAlias=this;
+                    $.ajax({
+                        url:"../recruitment/queryyearsworking",
+                        type:"post",
+                        dataType:"json",
+                        success:function (data) {
+                            yearsworkingAlias.yearsworkingParam=data
+                            console.log(data)
+                        }
+                    })
+                }
+            })
+            /*职位类别*/
+            new Vue({
+                el:"#jobcategory",
+                data:{
+                    jobcategoryParam:[]
+                },
+                created:function(){
+                    var jobcategoryAlias=this;
+                    $.ajax({
+                        url:"../recruitment/queryjobcategory",
+                        type:"post",
+                        dataType:"json",
+                        success:function (data) {
+                            jobcategoryAlias.jobcategoryParam=data
+                            console.log(data)
+                        }
+                    })
+                }
+            })
+            /*公司福利*/
+            new Vue({
+                el:"#cpwelfare",
+                data:{
+                    cpwelfareParam:[]
+                },
+                created:function(){
+                    var cpwelfareAlias=this;
+                    $.ajax({
+                        url:"../recruitment/querycpwelfare",
+                        type:"post",
+                        dataType:"json",
+                        success:function (data) {
+                            cpwelfareAlias.cpwelfareParam=data
+                            console.log(data)
+                        }
+                    })
+                }
+            })
+            /*学历*/
+            new Vue({
+                el:"#education",
+                data:{
+                    educationParam:[]
+                },
+                created:function(){
+                    var educationAlias=this;
+                    $.ajax({
+                        url:"../recruitment/queryeducation",
+                        type:"post",
+                        dataType:"json",
+                        success:function (data) {
+                            educationAlias.educationParam=data
+                            console.log(data)
+                        }
+                    })
+                }
+            })
+
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
+    <script src="js/jquery.serializejson.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="js/vue-resource.min.js"></script>
+    <script src="js/jquery-1.9.1.js"></script>
+
+    <link rel="stylesheet" href="css/x-admin.css" media="all">
+    <script src="js/x-layui.js" charset="utf-8"></script>
+</head>
+<body>
+
+
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>职位管理</legend>
+    </fieldset>
+
+
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">新增职位</li>
+            <li>所有职位</li>
+            <li>权限分配</li>
+            <li>商品管理</li>
+            <li>订单管理</li>
+        </ul>
+
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <!--新增职位-->
+                <form class="layui-form" action="" id="recruitsment">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">职位名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="introduction" id="introduction" required  lay-verify="required" placeholder="如：人力资源经理" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">工作性质</label>
+                        <div class="layui-input-block">
+                            <input name="jobnature" id="1" title="全职" type="radio" checked="" value="1">
+                            <input name="jobnature" id="2" title="兼职" type="radio" value="2">
+                            <input name="jobnature" id="3" title="实习" type="radio" value="3">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" id="distpicker">
+                        <label class="layui-form-label">工作地址</label>
+                        <div class="layui-input-inline">
+                            <select id="province1" name="province1">
+                                <option value="">—— 省 ——</option>
+                                <option value="北京市" selected="">北京市</option>
+                                <option value="天津市" >天津市</option>
+                                <option value="河北省" >河北省</option>
+                                <option value="山西省" >山西省</option>
+                                <option value="内蒙古自治区" >内蒙古自治区</option>
+                                <option value="辽宁省" >辽宁省</option>
+                                <option value="吉林省" >吉林省</option>
+                                <option value="黑龙江省" >黑龙江省</option>
+                                <option value="上海市" >上海市</option>
+                                <option value="江苏省">江苏省</option>
+                                <option value="浙江省" >浙江省</option>
+                                <option value="安徽省">安徽省</option>
+                                <option value="福建省" >福建省</option>
+                                <option value="江西省" >江西省</option>
+                                <option value="山东省" >山东省</option>
+                                <option value="河南省">河南省</option>
+                                <option value="湖北省">湖北省</option>
+                                <option value="湖南省">湖南省</option>
+                                <option value="广东省">广东省</option>
+                                <option value="广西壮族自治区">广西壮族自治区</option>
+                                <option value="海南省">海南省</option>
+                                <option value="重庆市">重庆市</option>
+                                <option value="四川省">四川省</option>
+                                <option value="贵州省">贵州省</option>
+                                <option value="云南省">云南省</option>
+                                <option value="西藏自治区">西藏自治区</option>
+                                <option value="陕西省">陕西省</option>
+                                <option value="甘肃省">甘肃省</option>
+                                <option value="青海省">青海省</option>
+                                <option value="宁夏回族自治区">宁夏回族自治区</option>
+                                <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                                <option value="台湾省">台湾省</option>
+                                <option value="香港特别行政区">香港特别行政区</option>
+                                <option value="澳门特别行政区">澳门特别行政区</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select id="city1" name="city">
+                                <option value="">—— 市 ——</option>
+                                <option value="北京市市辖区" selected="">北京市市辖区</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select id="district1" name="districtl">
+                                <option value="">—— 区 ——</option>
+                                <option value="东城区" selected="">东城区</option>
+                                <option value="西城区">西城区</option>
+                                <option value="朝阳区">朝阳区</option>
+                                <option value="丰台区">丰台区</option>
+                                <option value="石景山区">石景山区</option>
+                                <option value="海淀区">海淀区</option>
+                                <option value="门头沟区">门头沟区</option>
+                                <option value="房山区">房山区</option>
+                                <option value="通州区">通州区</option>
+                                <option value="顺义区">顺义区</option>
+                                <option value="昌平区">昌平区</option>
+                                <option value="大兴区">大兴区</option>
+                                <option value="怀柔区">怀柔区</option>
+                                <option value="平谷区">平谷区</option>
+                                <option value="密云区">密云区</option>
+                                <option value="延庆区">延庆区</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">月薪范围</label>
+                            <div class="layui-input-inline">
+                                <select name="srangeid" lay-verify="required" lay-search="" id="srange">
+                                    <option value="">直接选择或搜索选择</option>
+                                    <option v-for="(srangeAlias,index) in srangeParam" v-bind:value="index+1">{{srangeAlias.salaryrange}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">最低学历</label>
+                            <div class="layui-input-inline">
+                                <select name="educationid" lay-verify="required" lay-search="" id="education">
+                                    <option value="">直接选择或搜索选择</option>
+                                    <option v-for="(educationAlias,index) in educationParam" v-bind:value="index+1">{{educationAlias.educationname}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">工作年限</label>
+                            <div class="layui-input-inline">
+                                <select name="ywrangeid" lay-verify="required" lay-search="" id="yearsworking">
+                                    <option value="">直接选择或搜索选择</option>
+                                    <option v-for="(yearsworkingAlias,index) in yearsworkingParam" v-bind:value="index+1">{{yearsworkingAlias.ywrange}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">职位类别</label>
+                            <div class="layui-input-inline">
+                                <select name="jobcgid" lay-verify="required" lay-search="" id="jobcategory">
+                                    <option value="">直接选择或搜索选择</option>
+                                    <option v-for="(jobcategoryAlias,index) in jobcategoryParam" v-bind:value="index+1">{{jobcategoryAlias.jobcgname}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">公司福利</label>
+                            <div class="layui-input-inline">
+                                <select name="cpwelfareid" lay-verify="required" lay-search="" id="cpwelfare">
+                                    <option value="">直接选择或搜索选择</option>
+                                    <option v-for="(cpwelfareAlias,index) in cpwelfareParam" v-bind:value="index+1">{{cpwelfareAlias.cpwelfarename}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">职位描述</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入内容" class="layui-textarea" id="jobdescription " name="jobdescription"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">招聘人数</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="rnumbers" id="rnumbers" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="formDemo" id="btn">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-tab-item">
+                <form class="layui-form x-center" action="" style="width:70%">
+                    <div class="layui-form-pane" style="margin-top: 15px;">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:60px">字典名称</label>
+                            <div class="layui-input-inline" style="width:120px">
+                                <input type="text" name="name"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                            </div>
+                            <label class="layui-form-label" style="width:60px">表名</label>
+                            <div class="layui-input-inline" style="width:120px">
+                                <select name="tablename">
+                                    <option value="">请选择表</option>
+                                    <option value="user">user</option>
+                                    <option value="question">question</option>
+                                    <option value="question">question</option>
+                                </select>
+                            </div>
+                            <label class="layui-form-label" style="width:60px">字段名</label>
+                            <div class="layui-input-inline" style="width:120px">
+                                <select name="tablename">
+                                    <option value="">请选择字段名</option>
+                                    <option value="user">id</option>
+                                    <option value="question">nikename</option>
+                                    <option value="question">password</option>
+                                </select>
+                            </div>
+
+                            <div class="layui-input-inline" style="width:80px">
+                                <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe608;</i><查询></查询></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+                <div id="recruitments">
+                    <table class="layui-table">
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="" title="发呆" lay-skin="primary">全选
+                            </td>
+                            <td>招聘信息编号</td>
+                            <td>职位类别</td>
+                            <td>职位名称</td>
+                            <td>工作性质</td>
+                            <td>工作地址</td>
+                            <td>月薪范围</td>
+                            <td>工作年限</td>
+                            <td>学历</td>
+                            <td>招聘人数</td>
+                            <td>公司福利</td>
+                            <td>企业用户</td>
+                            <td>招聘状态</td>
+                            <td>操作</td>
+                        </tr>
+                        <tr v-for="rmAlias in rmParam">
+                            <td><input type="checkbox" name="" title="发呆" lay-skin="primary"></td>
+                            <td v-text="rmAlias.infoid"></td>
+                            <td v-text="rmAlias.jobcgname"></td>
+                            <td v-text="rmAlias.introduction"></td>
+                            <td>
+                                <span v-if="rmAlias.jobnature==1">
+                                    全职
+                                </span>
+                                <span v-if="rmAlias.jobnature==2">
+                                    兼职
+                                </span>
+                                <span v-if="rmAlias.jobnature==3">
+                                    实习
+                                </span>
+                            </td>
+                            <td v-text="rmAlias.workaddress"></td>
+                            <td v-text="rmAlias.salaryrange"></td>
+                            <td v-text="rmAlias.ywrange"></td>
+                            <td v-text="rmAlias.educationname"></td>
+                            <td v-text="rmAlias.rnumbers"></td>
+                            <td v-text="rmAlias.cpwelfarename"></td>
+                            <td v-text="rmAlias.epid"></td>
+                            <td>
+                                <span v-if="rmAlias.restate==1">
+                                    最新
+                                </span>
+                                <span v-if="rmAlias.restate==2">
+                                    招聘中
+                                </span>
+                                <span v-if="rmAlias.restate==3">
+                                    已招聘
+                                </span>
+                            </td>
+                            <!--<td>
+                                <div class="layui-btn-group">
+                                    <button class="layui-btn layui-btn-sm">
+                                        <i class="layui-icon">&#xe642;</i>
+                                    </button>
+                                    <button class="layui-btn layui-btn-sm">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </button>
+                                </div>
+                            </td>-->
+                            <td class="td-manage">
+                                <a title="编辑" href="javascript:;" onclick="data_edit('编辑','data-edit.html','4','','510')"
+                                   class="ml-5" style="text-decoration:none">
+                                    <i class="layui-icon">&#xe642;</i>
+                                </a>
+                                <a title="删除" href="javascript:;" @click="data_del(rmAlias.infoid)"
+                                   style="text-decoration:none">
+                                    <i class="layui-icon">&#xe640;</i>
+                                </a>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <script>
+                    new Vue({
+                        el:"#recruitments",
+                        data:{
+                            rmParam:[]
+                        },
+                        created:function () {
+                            var cc=this;
+                            $.ajax({
+                                url:"../recruitment/queryAllRecruitment",
+                                type:"post",
+                                success:function (data) {
+                                    cc.rmParam=data
+                                }
+                            })
+                        }
+                    });
+                </script>
+
+                <div id="test1"></div>
+
+                <script>
+                    layui.use('laypage', function(){
+                        var laypage = layui.laypage;
+
+                        //执行一个laypage实例
+                        laypage.render({
+                            elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+                            ,count: 50 //数据总数，从服务端得到
+                        });
+                    });
+                </script>
+
+
+            </div>
+            <div class="layui-tab-item">
+
+
+
+                <!--<table class="layui-table">
+                    <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" name="" value="">
+                        </th>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            名称
+                        </th>
+                        <th>
+                            表名
+                        </th>
+                        <th>
+                            字段名
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="">
+                        </td>
+                        <td>
+                            001
+                        </td>
+                        <td>
+                            昵称
+                        </td>
+                        <td>
+                            user
+                        </td>
+                        <td>
+                            nikename
+                        </td>
+                        <td class="td-manage">
+                            <a title="编辑" href="javascript:;" onclick="data_edit('编辑','data-edit.html','4','','510')"
+                               class="ml-5" style="text-decoration:none">
+                                <i class="layui-icon">&#xe642;</i>
+                            </a>
+                            <a title="删除" href="javascript:;" onclick="data_del(this,'1')"
+                               style="text-decoration:none">
+                                <i class="layui-icon">&#xe640;</i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>-->
+
+            </div>
+            <script>
+                layui.use(['element','layer','form'], function(){
+                    $ = layui.jquery;//jquery
+                    lement = layui.element();//面包导航
+                    layer = layui.layer;//弹出层
+                    form = layui.form();
+                })
+                //批量删除提交
+                function delAll () {
+                    layer.confirm('确认要删除吗？',function(index){
+                        //捉到所有被选中的，发异步进行删除
+                        layer.msg('删除成功', {icon: 1});
+                    });
+                }
+                //-编辑
+                function data_edit (title,url,id,w,h) {
+                    x_admin_show(title,url,w,h);
+                }
+
+                /*-删除*/
+                function data_del(obj){
+                    layer.confirm('确认要删除吗？',function(index){
+                        $.ajax({
+                            url:"../recruitment/delrecruitment",
+                            type:"post",
+                            data:{
+                                infoid:obj
+                            },
+                            success:function (data) {
+                                if(data){
+                                    alert("删除成功");
+                                    location.reload(true);
+                                }else{
+                                    alert("删除失败");
+                                }
+                            }
+                        })
+                    });
+                    //发异步删除数据
+                    /*$(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});*/
+                }
+            </script>
+            <div class="layui-tab-item">内容4</div>
+            <div class="layui-tab-item">内容5</div>
+        </div>
+    </div>
+
+<script src="shengshiqu/jquery.min.js"></script>
+<script src="shengshiqu/distpicker.data.js"></script>
+<script src="shengshiqu/distpicker.js"></script>
+<script src="shengshiqu/main.js"></script>
+
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+           layer.msg(JSON.stringify(data.field));
+            $.ajax({
+                url:"../recruitment/addRecruitment",
+                data:JSON.stringify(data.field),
+                type:"post",
+                contentType:"application/json",
+                success:function (data) {
+                    if(data){
+                        alert("添加成功");
+                        parent.location.href="../backstageone/index.html";
+                    }else{
+                        alert("添加失败")
+                    }
+                }
+            })
+            return false;
+        });
+    });
+</script>
+<script>
+    layui.use('element', function(){
+        var $ = layui.jquery
+            ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        var active = {
+            tabAdd: function(){
+                //新增一个Tab项
+                element.tabAdd('demo', {
+                    title: '新选项'+ (Math.random()*1000|0) //用于演示
+                    ,content: '内容'+ (Math.random()*1000|0)
+                    ,id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
+                })
+            }
+            ,tabDelete: function(othis){
+                //删除指定Tab项
+                element.tabDelete('demo', '44'); //删除：“商品管理”
+
+
+                othis.addClass('layui-btn-disabled');
+            }
+            ,tabChange: function(){
+                //切换到指定Tab项
+                element.tabChange('demo', '22'); //切换到：用户管理
+            }
+        };
+
+        $('.site-demo-active').on('click', function(){
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+
+        //Hash地址的定位
+        var layid = location.hash.replace(/^#test=/, '');
+        element.tabChange('test', layid);
+
+        element.on('tab(test)', function(elem){
+            location.hash = 'test='+ $(this).attr('lay-id');
+        });
+
+    });
+</script>
+<script>
+    /*月薪范围*/
+    new Vue({
+        el:"#srange",
+        data:{
+            srangeParam:[],
+
+        },
+        created:function(){
+            var srangeAlias=this;
+            $.ajax({
+                url:"../recruitment/querysrange",
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    srangeAlias.srangeParam=data
+                    console.log(data)
+                }
+            })
+        }
+    })
+    /*工作年限*/
+    new Vue({
+        el:"#yearsworking",
+        data:{
+            yearsworkingParam:[]
+        },
+        created:function(){
+            var yearsworkingAlias=this;
+            $.ajax({
+                url:"../recruitment/queryyearsworking",
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    yearsworkingAlias.yearsworkingParam=data
+                    console.log(data)
+                }
+            })
+        }
+    })
+    /*职位类别*/
+    new Vue({
+        el:"#jobcategory",
+        data:{
+            jobcategoryParam:[]
+        },
+        created:function(){
+            var jobcategoryAlias=this;
+            $.ajax({
+                url:"../recruitment/queryjobcategory",
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    jobcategoryAlias.jobcategoryParam=data
+                    console.log(data)
+                }
+            })
+        }
+    })
+    /*公司福利*/
+    new Vue({
+        el:"#cpwelfare",
+        data:{
+            cpwelfareParam:[]
+        },
+        created:function(){
+            var cpwelfareAlias=this;
+            $.ajax({
+                url:"../recruitment/querycpwelfare",
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    cpwelfareAlias.cpwelfareParam=data
+                    console.log(data)
+                }
+            })
+        }
+    })
+    /*学历*/
+    new Vue({
+        el:"#education",
+        data:{
+            educationParam:[]
+        },
+        created:function(){
+            var educationAlias=this;
+            $.ajax({
+                url:"../recruitment/queryeducation",
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    educationAlias.educationParam=data
+                    console.log(data)
+                }
+            })
+        }
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <script src="js/jquery-1.9.1.js"></script>
+</head>
+<body>
+    <div id="users">
+        <table border="1">
+            <tr>
+                <td>用户编号</td>
+                <td>用户邮箱</td>
+                <td>用户密码</td>
+                <td>用户状态</td>
+                <td>创建时间</td>
+                <td>修改时间</td>
+                <td>用户头像</td>
+                <td>关注公司</td>
+                <td>关注状态</td>
+            </tr>
+            <tr v-for="u in msg">
+                <td>{{u.useid}}</td>
+                <td>{{u.usemail}}</td>
+                <td>{{u.usepwd}}</td>
+                <td>{{u.usestate}}</td>
+                <td>{{u.usecreatetime}}</td>
+                <td>{{u.usepdatetime}}</td>
+                <td>{{u.useimage}}</td>
+                <td>{{u.useattention}}</td>
+                <td>{{u.useblock}}</td>
+            </tr>
+        </table>
+    </div>
+</b
+                 new Vue({
+        el:'#users',
+        data:{
+            msg:[]
+        },
+        //回调，获取值
+        created:function () {
+            var admins=this;
+            $.ajax({
+                url:"http://localhost:8080/recruit/user/query",
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    admins.msg=data
+                }
+            });
+        }
+    })
+</script>
+</html>
