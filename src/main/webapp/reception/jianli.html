@@ -567,10 +567,9 @@
 						<p v-for="worin in wor">
 							<span v-for="worin.wpcompanyname">{{worin.wpcompanyname}} |  </span>
 							<span v-for="worin.wpinposition">{{worin.wpinposition}}  </span><br/>
-							<span v-for="worin.wpstarttime"><span
-                                    style="color: red">开始时间:</span>{{worin.wpstarttime}}</span><br/>
-							<span v-for="worin.wpstopetime"><span
-                                    style="color: red">结束时间:</span>{{worin.wpstopetime}}</span>
+							<span v-for="worin.wpstarttime"><span style="color: red">开始时间:</span>{{worin.wpstarttime}}</span><br/>
+							<span v-for="worin.wpstopetime"><span style="color: red">结束时间:</span>{{worin.wpstopetime}}</span><br/>
+                            <span v-for="worin.wpworkdescribe">{{worin.wpworkdescribe}}</span>
 						</p>
 					</span>
                     </div>
@@ -598,14 +597,13 @@
                                         <span class="redstar">*</span>
                                     </td>
                                     <td>
-                                        <input type="text" placeholder="公司名称" name="companyName" class="companyName">
+                                        <input type="text" placeholder="公司名称" name="wpcompanyname" class="wpcompanyname">
                                     </td>
                                     <td valign="top">
                                         <span class="redstar">*</span>
                                     </td>
                                     <td>
-                                        <input type="text" placeholder="职位名称，如：产品经理" name="positionName"
-                                               class="positionName">
+                                        <input type="text" placeholder="职位名称，如：产品经理" name="wpinposition" class="wpinposition">
                                     </td>
                                 </tr>
                                 <tr>
@@ -789,9 +787,15 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td valign="top"><span class="redstar">*</span></td>
+                                    <td colspan="3">
+                                        <textarea placeholder="工作描述" name="wpworkdescribe"></textarea >
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td></td>
                                     <td colspan="3">
-                                        <input type="submit" value="保 存" class="btn_profile_save">
+                                        <input type="button" value="保 存" class="btn_profile_save" onclick="tijiao()">
                                         <a class="btn_profile_cancel" href="javascript:;">取 消</a>
                                     </td>
                                 </tr>
@@ -799,6 +803,9 @@
                             </table>
                             <input type="hidden" class="expId" value="">
                         </form><!--end .experienceForm-->
+                        <script>
+                            
+                        </script>
 
                         <ul class="wlist clearfix">
                         </ul>

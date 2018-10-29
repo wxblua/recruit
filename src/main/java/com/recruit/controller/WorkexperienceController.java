@@ -1,5 +1,6 @@
 package com.recruit.controller;
 
+import com.recruit.entity.Workexperience;
 import com.recruit.service.WorkexperienceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +45,12 @@ public class WorkexperienceController {
             fig=true;
         }
         return fig;
+    }
+
+    /*添加工作经历*/
+    @RequestMapping("addworkperi")
+    public Integer addworkperi(Workexperience workexperience){
+        return workexperienceService.addworkperi(workexperience);
     }
 
 }

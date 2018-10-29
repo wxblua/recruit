@@ -10,10 +10,11 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
 	<!-- load css -->
-	<link rel="stylesheet" type="text/css" href="webback/common/layui/css/layui.css" media="all">
-	<link rel="stylesheet" type="text/css" href="webback/common/global.css" media="all">
-	<link rel="stylesheet" type="text/css" href="webback/css/adminstyle.css" media="all">
-	<script src="webback/js/navtab.js"></script>
+	<link rel="stylesheet" type="text/css" href="common/layui/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" href="common/global.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/adminstyle.css" media="all">
+	<script src="js/navtab.js"></script>
+
 
 </head>
 <body>
@@ -45,12 +46,12 @@
 
 					</li>
 					<li class="layui-nav-item">
-						<a href="webback/login.html">
+						<a href="login.html">
                         <i class="iconfont icon-diannao1"></i>
 						切换用户</a>
 					</li>
 					<li class="layui-nav-item">
-						<a href="webback/login.html">
+						<a href="login.html">
                         <i class="iconfont icon-exit"></i>
 						退出</a>
 					</li>
@@ -64,7 +65,7 @@
 		<!-- 左侧菜单 -->
 		<ul class="layui-nav layui-nav-tree">
 			<li class="layui-nav-item layui-this">
-				<a href="javascript:;" data-url="webback/main.html">
+				<a href="javascript:;" data-url="main.html">
 				    <i class="iconfont icon-home1" data-icon='icon-home1'></i>
 					<span>后台首页</span>
 				</a>
@@ -78,13 +79,13 @@
 				</a>
 				<dl class="layui-nav-child">
                     <dd>
-                        <a href="javascript:;" data-url="webback/personInfo.html">
+                        <a href="javascript:;" data-url="personInfo.html">
                             <i class="iconfont icon-geren1" data-icon='icon-geren1'></i>
                             <span>网站信息</span>
                         </a>
                     </dd>
                     <dd>
-                        <a href="javascript:;" data-url="webback/updateweb.html">
+                        <a href="javascript:;" data-url="updateweb.html">
                             <i class="iconfont icon-iconfuzhi01" data-icon='icon-iconfuzhi01'></i>
                             <span>修改密码</span>
                         </a>
@@ -106,19 +107,19 @@
 					    		</a>
 					    	</dd>
 						   <dd>
-							   <a href="javascript:;" data-url="webback/personInfo.html">
+							   <a href="javascript:;" data-url="personInfo.html">
 								   <i class="iconfont icon-geren1" data-icon='icon-geren1'></i>
 								   <span>会员管理</span>
 							   </a>
 						   </dd>
 						   <dd>
-							   <a href="javascript:;" data-url="webback/queryComplain.html">
+							   <a href="javascript:;" data-url="./queryComplain.html">
 								   <i class="iconfont icon-geren1" data-icon='icon-geren1'></i>
 								   <span>投诉管理</span>
 							   </a>
 						   </dd>
 						   <dd>
-							   <a href="javascript:;" data-url="webback/personInfo.html">
+							   <a href="javascript:;" data-url="personInfo.html">
 								   <i class="iconfont icon-geren1" data-icon='icon-geren1'></i>
 								   <span>员工管理</span>
 							   </a>
@@ -135,13 +136,13 @@
 				</a>
 				<dl class="layui-nav-child">
 					<dd>
-						<a href="javascript:;" data-url="webback/queryuser.html">
+						<a href="javascript:;" data-url="./queryuser.html">
 							<i class="iconfont icon-geren1" data-icon='icon-geren1'></i>
 							<span>个人用户</span>
 						</a>
 					</dd>
 					<dd>
-						<a href="javascript:;" data-url="webback/queryentprise.html">
+						<a href="javascript:;" data-url="./queryentprise.html">
 							<i class="iconfont icon-geren1" data-icon='icon-geren1'></i>
 							<span>企业用户</span>
 						</a>
@@ -158,7 +159,7 @@
 				</a>
 				<dl class="layui-nav-child">
 					<dd>
-						<a href="javascript:;" data-url="webback/queryadvertising.html">
+						<a href="javascript:;" data-url="./queryadvertising.html">
 							<i class="iconfont icon-wenzhang1" data-icon='icon-geren1'></i>
 							<span>页面广告管理</span>
 						</a>
@@ -175,11 +176,14 @@
 					</a>
 					<dl class="layui-nav-child">
                            <dd>
-                           	   <a href="javascript:;" data-url="webback/404.html">
+                           	   <a href="javascript:;" data-url="404.html">
 					              <i class="iconfont icon-zhuti"  data-icon='icon-zhuti'></i>
 					              <span>404提示页面</span>
 					           </a>
                            </dd>
+						<dd>
+							<a href="404.html"></a>
+						</dd>
                     </dl>
 				</li>
 		</ul>
@@ -207,39 +211,38 @@
 				</ul>
 			<div class="layui-tab-content" style="min-height: 150px; ">
 				<div class="layui-tab-item layui-show">
-					<iframe class="larry-iframe" data-id='0' src="webback/main.html" style="border: 0px solid red;height: 1000px;"></iframe>
+					<iframe class="larry-iframe" data-id='0' src="main.html" style="border: 0px solid #58ff89;height: 1000px;"></iframe>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 	<!-- 加载js文件-->
-	<script type="text/javascript" src="webback/common/layui/layui.js"></script>
-	<script type="text/javascript"  src="webback/js/index.js"></script>
-	<script type="text/javascript" src="webback/js/larry.js"></script>
-	<script src="webback/js/jquery-1.9.1.js"></script>
-	<script src="webback/js/vue.min.js"></script>
-
+	<script type="text/javascript" src="common/layui/layui.js"></script>
+	<script type="text/javascript"  src="js/index.js"></script>
+	<script type="text/javascript"  src="js/larry.js"></script>
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/vue.min.js"></script>
 
 	<script>
 		new Vue({
-            el:'#abc',
-            data:{
-                msg:[]
-            },
-            //回调,获取值
-            created:function () {
-                var admins=this;
-                $.ajax({
-                    url:"http://localhost:8080/recruit/login/queryback",
-                    type:"post",
-                    dataType:"json",
-                    success:function (data) {
-                        admins.msg=data;
-                    }
-                });
-            }
-        })
+			el:'#abc',
+			data:{
+				msg:[]
+			},
+			//回调,获取值
+			created:function () {
+				var admins=this;
+				$.ajax({
+					url:"http://localhost:8080/recruit/login/queryback",
+					type:"post",
+					dataType:"json",
+					success:function (data) {
+						admins.msg=data;
+					}
+				});
+			}
+		})
 	</script>
 </body>
 </html>

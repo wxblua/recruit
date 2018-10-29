@@ -33,8 +33,9 @@
             </tr>
         </table>
     </div>
-</b
-                 new Vue({
+</body>
+<script>
+    new Vue({
         el:'#users',
         data:{
             msg:[]
@@ -43,7 +44,7 @@
         created:function () {
             var admins=this;
             $.ajax({
-                url:"http://localhost:8080/recruit/user/query",
+                url:"../user/query",
                 type:"post",
                 dataType:"json",
                 success:function (data) {
