@@ -45,7 +45,6 @@
             <ul class="reset" id="navheader">
                 <li class="current"><a href="index.html">首页</a></li>
                 <li><a href="companylist.html">公司</a></li>
-                <li><a href="h/toForum.html" target="_blank">论坛</a></li>
                 <li><a href="jianli.html" rel="nofollow">我的简历</a></li>
                 <li><a href="create.html" rel="nofollow">发布职位</a></li>
             </ul>
@@ -60,162 +59,80 @@
 
         <div id="sidebar">
             <div class="mainNavs">
-
-                <div class="menu_box">
-
-                        <div class="menu_main">
-                            <span id="asd">
-                            <h2 v-for="a in b">{{a.name1}}<span></span></h2>
-                                </span>
-                        </div>
-
-                        <script>
-                            new Vue({
-                                el:"#asd",
-                                data:{
-                                    b:[]
-                                },
-                                created:function(){
-                                    var c=this;
-                                    $.post("../test/test1",{},function(data){
-                                        c.b=data;
-                                    })
-                                }
-                            })
-                        </script>
-                        <div class="menu_sub dn">
-                            <dl class="reset">
-                                <dt >
-                                    <span id="qwe">
-                                        <a href="h/jobs/list_后端开发?labelWords=label" v-for="c in d">
-                                            {{c.name2}}
-                                        </a>
-                                    </span>
-                                </dt>
-                                <script>
-                                    new Vue({
-                                        el:"#qwe",
-                                        data:{
-                                            d:[]
-                                        },
-                                        created:function(){
-                                            var f=this;
-                                            $.post("../test/test2",{},function(data){
-                                                f.d=data;
-                                            })
-                                        }
-                                    })
-                                </script>
-                                <span id="zxc">
-                                    <dd v-for="g in h">
-                                        <a href="h/jobs/list_Java?labelWords=label" class="curr">{{g.name3}}</a>
-                                    </dd>
-                                </span>
-                                <script>
-                                    new Vue({
-                                        el:"#zxc",
-                                        data:{
-                                            h:[]
-                                        },
-                                        created:function(){
-                                            var t=this;
-                                            $.post("../test/test3",{},function(data){
-                                                t.h=data;
-                                            })
-                                        }
-                                    })
-                                </script>
-                            </dl>
-                        </div>
-                </div>
-
-
                 <div class="menu_box">
                     <div class="menu_main">
-                        <h2>设计 <span></span></h2>
+
                     </div>
-                    <div class="menu_sub dn">
-                        <dl class="reset">
-                            <dt>
-                                <a href="h/jobs/list_视觉设计?labelWords=label">
-                                    视觉设计
-                                </a>
-                            </dt>
-                            <dd>
-                                <a href="h/jobs/list_%E8%A7%86%E8%A7%89%E8%AE%BE%E8%AE%A1%E5%B8%88?labelWords=label">视觉设计师</a>
-                                <a href="h/jobs/list_%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1%E5%B8%88?labelWords=label">网页设计师</a>
-                                <a href="h/jobs/list_Flash%E8%AE%BE%E8%AE%A1%E5%B8%88?labelWords=label">Flash设计师</a>
-                                <a href="h/jobs/list_APP%E8%AE%BE%E8%AE%A1%E5%B8%88?labelWords=label">APP设计师</a>
-                                <a href="h/jobs/list_UI%E8%AE%BE%E8%AE%A1%E5%B8%88?labelWords=label">UI设计师</a>
-                                <a href="h/jobs/list_%E5%B9%B3%E9%9D%A2%E8%AE%BE%E8%AE%A1%E5%B8%88?labelWords=label">平面设计师</a>
-                                <a href="h/jobs/list_%E7%BE%8E%E6%9C%AF%E8%AE%BE%E8%AE%A1%E5%B8%88%EF%BC%882D+3D%EF%BC%89?labelWords=label">美术设计师（2D/3D）</a>
-                                <a href="h/jobs/list_%E5%B9%BF%E5%91%8A%E8%AE%BE%E8%AE%A1%E5%B8%88?labelWords=label">广告设计师</a>
-                                <a href="h/jobs/list_%E5%A4%9A%E5%AA%92%E4%BD%93%E8%AE%BE%E8%AE%A1%E5%B8%88?labelWords=label">多媒体设计师</a>
-                                <a href="h/jobs/list_%E5%8E%9F%E7%94%BB%E5%B8%88?labelWords=label">原画师</a>
-                                <a href="h/jobs/list_%E6%B8%B8%E6%88%8F%E7%89%B9%E6%95%88?labelWords=label">游戏特效</a>
-                                <a href="h/jobs/list_%E6%B8%B8%E6%88%8F%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1%E5%B8%88?labelWords=label">游戏界面设计师</a>
-                                <a href="h/jobs/list_%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF?labelWords=label">游戏场景</a>
-                                <a href="h/jobs/list_%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2?labelWords=label">游戏角色</a>
-                                <a href="h/jobs/list_%E6%B8%B8%E6%88%8F%E5%8A%A8%E4%BD%9C?labelWords=label">游戏动作</a>
-                            </dd>
-                        </dl>
-                        <dl class="reset">
-                            <dt>
-                                <a href="h/jobs/list_交互设计?labelWords=label">
-                                    交互设计
-                                </a>
-                            </dt>
-                            <dd>
-                                <a href="h/jobs/list_%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1%E5%B8%88?labelWords=label">交互设计师</a>
-                                <a href="h/jobs/list_%E6%97%A0%E7%BA%BF%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1%E5%B8%88?labelWords=label">无线交互设计师</a>
-                                <a href="h/jobs/list_%E7%BD%91%E9%A1%B5%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1%E5%B8%88?labelWords=label">网页交互设计师</a>
-                                <a href="h/jobs/list_%E7%A1%AC%E4%BB%B6%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1%E5%B8%88?labelWords=label">硬件交互设计师</a>
-                            </dd>
-                        </dl>
-                        <dl class="reset">
-                            <dt>
-                                <a href="h/jobs/list_用户研究?labelWords=label">
-                                    用户研究
-                                </a>
-                            </dt>
-                            <dd>
-                                <a href="h/jobs/list_%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%88?labelWords=label">数据分析师</a>
-                                <a href="h/jobs/list_%E7%94%A8%E6%88%B7%E7%A0%94%E7%A9%B6%E5%91%98?labelWords=label">用户研究员</a>
-                                <a href="h/jobs/list_%E6%B8%B8%E6%88%8F%E6%95%B0%E5%80%BC%E7%AD%96%E5%88%92?labelWords=label">游戏数值策划</a>
-                            </dd>
-                        </dl>
-                        <dl class="reset">
-                            <dt>
-                                <a href="h/jobs/list_高端设计职位?labelWords=label">
-                                    高端职位
-                                </a>
-                            </dt>
-                            <dd>
-                                <a href="h/jobs/list_%E8%AE%BE%E8%AE%A1%E7%BB%8F%E7%90%86+%E4%B8%BB%E7%AE%A1?labelWords=label">设计经理/主管</a>
-                                <a href="h/jobs/list_%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%9B%91?labelWords=label">设计总监</a>
-                                <a href="h/jobs/list_%E8%A7%86%E8%A7%89%E8%AE%BE%E8%AE%A1%E7%BB%8F%E7%90%86+%E4%B8%BB%E7%AE%A1?labelWords=label">视觉设计经理/主管</a>
-                                <a href="h/jobs/list_%E8%A7%86%E8%A7%89%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%9B%91?labelWords=label">视觉设计总监</a>
-                                <a href="h/jobs/list_%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1%E7%BB%8F%E7%90%86+%E4%B8%BB%E7%AE%A1?labelWords=label">交互设计经理/主管</a>
-                                <a href="h/jobs/list_%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%9B%91?labelWords=label">交互设计总监</a>
-                                <a href="h/jobs/list_%E7%94%A8%E6%88%B7%E7%A0%94%E7%A9%B6%E7%BB%8F%E7%90%86+%E4%B8%BB%E7%AE%A1?labelWords=label">用户研究经理/主管</a>
-                                <a href="h/jobs/list_%E7%94%A8%E6%88%B7%E7%A0%94%E7%A9%B6%E6%80%BB%E7%9B%91?labelWords=label">用户研究总监</a>
-                            </dd>
-                        </dl>
+                    <div class="menu_sub dn" id="a">
+
                     </div>
                 </div>
+                <script>
+                    $(function (){
+                       $.ajax({
+                           url:'../test/test1',
+                           type:'post',
+                           success:function (data) {
+                               var sk="";
+                               for(var i=0;i<data.length;i++){
+                                    sk+="<h2 class='"+data[i].id1+"' onmouseover='sk(this)' style='display: block;padding-top: 25px;width:100%;'>"+data[i].name1+"<span></span></h2>";
+                               }
+                                $(".menu_box .menu_main").html(sk);
+                           }
+                       });
+                    });
+                    function sk(param){
+                        $(".menu_box h2").css("border","1px solid #fff");
+                        $("."+param.className).css("border","1px solid write");
+                        $.ajax({
+                            url:'../test/test2',
+                            cache:false,
+                            async:false,
+                            type:'post',
+                            data:{id1:param.className},
+                            success:function (data) {
+                                var ss="";
+                                for(var i=0;i<data.length;i++) {
+                                    ss+="<dt>" +
+                                        "<a href='#'>"+data[i].name2+"</a>" +
+                                        "</dt><span class='as1' name='"+data[i].id2+"' style='display: inline-block;width:100%;height:50px;' id='"+i+"'></span>";
+                                }
+                                $("#a").html(ss);
+                            }
+                        });
+                        $.ajax({
+                            url:'../test/test5',
+                            cache:false,
+                            async:false,
+                            type:'post',
+                            data:{id1:param.className},
+                            success:function (data) {
+                                var ss="";
+                                for(var i=0;i<data.length;i++){
+                                    ss+= "<dd style='display: inline-block;'>" +
+                                        "<a href='#' >"+data[i].name3+"</a></dd>";
+                                }
+                                $(".as1").html(ss);
+                            }
+                        });
+                    }
+                </script>
+
+
 
             </div>
             <a class="subscribe" href="subscribe.html" target="_blank">订阅职位</a>
         </div>
         <div class="content">
             <div id="search_box">
-                <form id="searchForm" name="searchForm" action="list.html" method="get">
+                <form action="list.html" method="get">
                     <ul id="searchType">
                         <li data-searchtype="1" class="type_selected">职位</li>
                         <li data-searchtype="4">公司</li>
                     </ul>
                     <div class="searchtype_arrow"></div>
                     <input type="text" id="search_input" name="kd" tabindex="1" value="" placeholder="请输入职位名称，如：产品经理"/>
+                    <a id="show_find" style="border: 0px solid red; width: 500px; height: 300px;position: absolute;z-index: 1878787;margin-left: -494px;margin-top: 84px; "></a>
                     <input type="hidden" name="spc" id="spcInput" value=""/>
                     <input type="hidden" name="pl" id="plInput" value=""/>
                     <input type="hidden" name="gj" id="gjInput" value=""/>
@@ -408,84 +325,122 @@
             </ul>
             <div id="hotList">
                 <ul class="hot_pos reset">
-                    <li class="clearfix">
-                        <div class="hot_pos_l" id="qaz">
-                            <span v-for="a in b">
-                            <div class="mb10">
-                                <a href="h/jobs/147822.html" target="_blank">{{a.introduction}}</a>&nbsp;
-                                <span class="c9">{{a.workaddress}}</span>
-                            </div>
-                            <span><em class="c7">月薪： </em>{{a.salaryrange}}</span>
-                            <span><em class="c7">经验：</em>{{a.ywrange}}</span>
-                            <span><em class="c7">最低学历： </em>{{a.educationname}}</span>
-                            <span><em class="c7">职位诱惑：</em>发展前景</span>
-                            <span v-if="a.restate==1"><em class="c7">招聘状态：</em>最新</span>
-                            <span v-if="a.restate==2"><em class="c7">招聘状态：</em>招聘中</span>
-                            <br/>
-                            <span>1天前发布</span>
-                            </span>
+                    <li class="clearfix" id="searchqyzw">
+                    <span v-for="zwAlias in zwParam">
+                    <div class="hot_pos_l">
+                        <div class="mb10">
+                            <a href="#" target="_blank">{{zwAlias.introduction}}</a>
+                            <span class="c9">{{zwAlias.cyaddress}}</span>
                         </div>
-                        <script>
-                            new Vue({
-                                el:"#qaz",
-                                data:{
-                                    b:[]
-                                },
-                                created:function(){
-                                    var c=this;
-                                    $.post("../recruitment/searchrecruit",{},function(data){
-                                        c.b=data;
+                        <span><em class="c7">月薪：</em>{{zwAlias.salaryrange}}</span>
+                        <span><em class="c7">经验：</em>{{zwAlias.ywrange}}</span>
+                        <span><em class="c7">最低学历： </em>{{zwAlias.educationname}}</span>
+                        <br/>
+                        <span v-if="zwAlias.restate==1"><em class="c7">招聘状态：</em>最新</span>
+                        <span v-if="zwAlias.restate==2"><em class="c7">招聘状态：</em>招聘中</span>
+                        <span>{{zwAlias.fbtime}}</span>
+                    </div>
+                    <div class="hot_pos_r">
+                        <span><em class="c7">企业名称： </em>{{zwAlias.epname}}</span>
+                        <span><em class="c7">创始人：</em>{{zwAlias.originator}}</span>
+                        <br/>
+                        <span><em class="c7">阶段： </em>{{zwAlias.ctypename}}</span>
+                        <span><em class="c7">规模： </em>{{zwAlias.cpcalename}}</span>
+                        <ul class="companyTags reset">
+                            <li>{{zwAlias.cpwelfareid}}</li>
+                        </ul>
+                        <button @click="getindex(zwAlias.epid)">关注公司</button>
+                        <button @click="joinblack(zwAlias.epid)">加入黑名单</button>
+                    </div>
+                    </span>
+                    </li>
+                    <script>
+                        new Vue({
+                            el:"#searchqyzw",
+                            data:{
+                                zwParam:[]
+                            },
+                            created:function(){
+                                var zw=this;
+                                $.post("../recruitment/searchrecruit",{},function(data){
+                                    zw.zwParam=data;
+                                })
+                            },
+                            methods: {
+                                getindex(index) {
+                                    $.ajax({
+                                        url: "http://localhost:8080/recruit/atten/addatten",
+                                        type: "post",
+                                        dataType: "json",
+                                        data: {"epid": index},    //单个值传输
+                                        success: function (data) {
+                                            if (data == true) {
+                                                alert("关注成功");
+                                            } else {
+                                                alert("该公司已关注");
+                                            }
+                                        }
+                                    })
+                                }, joinblack(index) {
+                                    $.ajax({
+                                        url: "http://localhost:8080/recruit/blist/addblist",
+                                        type: "post",
+                                        dataType: "json",
+                                        data: {"epid": index},    //单个值传输
+                                        success: function (data) {
+                                            if (data == true) {
+                                                alert("加入黑名单成功");
+                                            } else {
+                                                alert("该公司已加入黑名单");
+                                            }
+                                        }
                                     })
                                 }
-                            })
-                        </script>
-                    </li>
+                            }
+                        })
+                    </script>
                     <a href="list.html" class="btn fr" target="_blank">查看更多</a>
                 </ul>
                 <!--显示的最新职位-->
                 <ul class="hot_pos hot_posHotPosition reset" style="display:none;">
-                    <li class="clearfix">
-                        <div class="hot_pos_l" id="wsx">
-                            <span v-for="c in d">
-                            <div class="mb10">
-                                <a href="h/jobs/149389.html" target="_blank">{{c.introduction}}</a>
-                                <span class="c9">{{c.workaddress}}</span>
-                            </div>
-                            <span><em class="c7">月薪： </em>{{c.salaryrange}}</span>
-                            <span><em class="c7">经验：</em>{{c.ywrange}}</span>
-                            <span><em class="c7">最低学历： </em>{{c.educationname}}</span>
-                            <br/>
-                            <span><em class="c7">职位诱惑：</em>IPO了的互联网创业公司，潜力无限！</span>
-                            <span v-if="c.restate==1"><em class="c7">招聘状态：</em>最新</span>
-                            <span v-if="c.restate==2"><em class="c7">招聘状态：</em>招聘中</span>
-                            <br/>
-                            <a  class="wb">1天前发布</a>
-                            </span>
+                    <li class="clearfix" id="searchqyzw2">
+                    <span v-for="zwAlias2 in zwParam2">
+                    <div class="hot_pos_l">
+                        <div class="mb10">
+                            <a href="#" title="前端开发" target="_blank">{{zwAlias2.introduction}}</a>
+                            &nbsp;
+                            <span class="c9">{{zwAlias2.cyaddress}}</span>
                         </div>
-                        <!--<div class="hot_pos_r">
-                            <div class="mb10"><a href="h/c/8250.html" target="_blank">途牛旅游网</a></div>
-                            <span><em class="c7">领域：</em> 电子商务,在线旅游</span>
-                            <span><em class="c7">创始人：</em>于敦德</span>
-                            <br/>
-                            <span> <em class="c7">阶段： </em>上市公司</span>
-                            <span> <em class="c7">规模：</em>500-2000人</span>
-                            <ul class="companyTags reset">
-                                <li>绩效奖金</li>
-                                <li>股票期权</li>
-                                <li>五险一金</li>
-                            </ul>
-                        </div>-->
+                        <span><em class="c7">月薪：</em>{{zwAlias2.salaryrange}}</span>
+                        <span><em class="c7">经验：</em>{{zwAlias2.ywrange}}</span>
+                        <span><em class="c7">最低学历： </em>{{zwAlias2.educationname}}</span>
+                        <br/>
+                        <span v-if="zwAlias2.restate==1"><em class="c7">招聘状态：</em>最新</span>
+                        <span v-if="zwAlias2.restate==2"><em class="c7">招聘状态：</em>招聘中</span>
+                        <span>{{zwAlias2.fbtime}}</span>
+                    </div>
+                    <div class="hot_pos_r">
+                        <span><em class="c7">企业名称： </em>{{zwAlias2.epname}}</span>
+                        <span><em class="c7">创始人：</em>{{zwAlias2.originator}}</span>
+                        <br/>
+                        <span><em class="c7">阶段： </em>{{zwAlias2.ctypename}}</span>
+                        <span><em class="c7">规模： </em>{{zwAlias2.cpcalename}}</span>
+                        <ul class="companyTags reset">
+                            <li>{{zwAlias.cpwelfareid}}</li>
+                        </ul>
+                    </div>
+                    </span>
                     </li>
                     <script>
                         new Vue({
-                            el:"#wsx",
+                            el:"#searchqyzw2",
                             data:{
-                                d:[]
+                                zwParam2:[]
                             },
                             created:function(){
-                                var e=this;
+                                var zw=this;
                                 $.post("../recruitment/searchrecruit",{},function(data){
-                                    e.d=data;
+                                    zw.zwParam2=data;
                                 })
                             }
                         })
@@ -599,6 +554,7 @@
     <div class="wrapper">
         <a href="h/about.html" target="_blank" rel="nofollow">联系我们</a>
         <a href="h/af/zhaopin.html" target="_blank">互联网公司导航</a>
+        <a id="ts">投诉网站</a>
         <a href="http://e.weibo.com/lagou720" target="_blank" rel="nofollow">拉勾微博</a>
         <a class="footer_qr" href="javascript:void(0)" rel="nofollow">拉勾微信<i></i></a>
         <div class="copyright">&copy;2013-2014 Lagou <a target="_blank"
@@ -606,12 +562,176 @@
         </div>
     </div>
 </div>
-
+<div id="tscontext" style="background-color: pink;width: 400px;height: 200px;border: 1px solid red;top: -500px;left: 450px; position: relative;z-index: 288080;display: none;">
+    <a id="close">X</a>
+    <form id="fm">
+        <p>
+            投诉内容<input type="text" name="ccontents" style="width: 200px;">
+        </p>
+        <p>
+            投诉图片<input type="file" name="cimage">
+        </p>
+        <p>
+            <input type="button"  value="提交" id="sub">
+        </p>
+        </table>
+    </form>
+</div>
 <script type="text/javascript" src="../reception/style/js/core.min.js"></script>
 <script type="text/javascript" src="../reception/style/js/popup.min.js"></script>
 
-<!-- <script src="style/js/wb.js" type="text/javascript" charset="utf-8"></script>
- -->
-
+<script>
+    new Vue({
+        el:'#zong',
+        data:{
+            msg:[]
+        },
+        //回调,获取值
+        created:function () {
+            var admins=this;
+            $.ajax({
+                url:"http://localhost:8080/recruit/resume/selectresume",
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    admins.msg=data;
+                }
+            })
+        }
+    })
+    $("#av").click(function () {
+        $('#bc').hide();
+    })
+    $("#ga").click(function () {
+        $.ajax({
+            url:"http://localhost:8080/recruit/liver/adddelivery",
+            type:"post",
+            data:{
+                "infoid":$("#nb").val(),
+            },
+            dataType:"json",
+            success:function (data) {
+                if (data==1){
+                    alert("投递成功");
+                    $("#bc").hide();
+                }else{
+                    alert("投递失败");
+                    $("#bc").hide();
+                }
+            }
+        })
+    })
+</script>
+<div class="m-modal" >
+    <div class="m-modal-dialog">
+        <div class="m-top">
+            <h4 class="m-modal-title">
+                若您已有简历，可直接登录<button><a href="http://localhost:8080/recruit/reception/login.html">登录</a></button>
+            </h4>
+            <span class="m-modal-close">&times;</span>
+        </div>
+        <span id="cen">
+        <div class="m-middle">
+            <form id="frm">
+            <table border="1" cellpadding="0" cellspacing="0">
+                <p>*&nbsp;真实姓名:&nbsp;<input type="text" name="rename" style="width: 460px"></p>
+                <p>*&nbsp;性别:&nbsp;<input type="radio" value="男" name="resex">男&nbsp;&nbsp;<input type="radio" value="女" name="resex">女</p>
+                <p>*&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄:&nbsp;<input type="text" name="reage" style="width: 460px"></p>
+                <p>*&nbsp;离职状态:&nbsp;<input type="text" name="jobhunter" style="width: 460px;"></p>
+                <p>*&nbsp;居住地址:&nbsp;<input type="text" name="dwelladdress" style="width: 460px;"></p>
+                <p>*&nbsp;工作经验:&nbsp;<input type="text" name="rexperience" style="width: 460px;"></p>
+                <p>*&nbsp;手机号码:&nbsp;<input type="text" name="rephone" style="width: 460px;"></p>
+                <p>*&nbsp;邮箱地址:&nbsp;<input type="text" name="remail" style="width: 460px;"></p>
+                <p>*&nbsp;简历头像:&nbsp;<input type="file" name="reimages" style="width: 460px;"></p>
+                <!--<p>*&nbsp;手机号:&nbsp;<input type="text" name="" style="width: 240px;">
+                    <input type="text" value="获取验证码" style="width: 200px;">
+                </p>-->
+            </table>
+            </form>
+        </div>
+        <div class="m-bottom">
+            <button class="m-btn-sure" id="go">确定</button>
+            <button class="m-btn-cancel">取消</button>
+        </div>
+        </span>
+    </div>
+</div>
+<script type="text/javascript" src="../js/jquery.my-modal.1.1.js"></script>
+<script>
+    $("#go").click(function () {
+        var form=new FormData(document.getElementById("frm"));
+        $.ajax({
+            url:"http://localhost:8080/recruit/resume/addresu?",
+            type:"post",
+            data:form,
+            processData:false,
+            contentType:false,
+            success:function (data) {
+                if(data=="true"){
+                    alert("申请成功");
+                }else {
+                    alert("申请失败");
+                }
+            }
+        })
+    })
+    $("#sub").click(function () {
+        var form=new FormData(document.getElementById("fm"));
+        $.ajax({
+            url:'http://localhost:8080/recruit/complain/addcom',
+            type:"post",
+            data:form,
+            processData:false,
+            contentType:false,
+            success:function (data) {
+                if(data=='true'){
+                    alert("投诉成功");
+                    $('#tscontext').hide();
+                }else{
+                    alert("投诉失败");
+                }
+            }
+        })
+    })
+    $(function () {
+        $('#ts').click(function () {
+            $('#tscontext').show();
+        })
+        $('#close').click(function () {
+            $('#tscontext').hide();
+        })
+        $("#search_input").keyup(function () {
+            var si=$(this).val();
+            var time=new Date().getTime();
+            $.ajax({
+                type:"post",
+                url:"../recruitment/auto",
+                data:{introduction:si,time:time},
+                success:function (data) {
+                    var res=data.split(",");
+                    var html="";
+                    for (var i=0;i<res.length;i++){
+                        html+="<div style='display:block;line-height:30px;' onclick='setSearch_onclick(this)' onmouseout='changeBackColor_out(this)' onmouseover='changeBackColor_over(this)'>"+res[i]+"</div>"
+                    }
+                    $("#show_find").show();
+                    $("#show_find").html(html);
+                }
+            })
+        })
+    })
+    //鼠标移动到内容上
+    function changeBackColor_over(div) {
+        $(div).css("background-color","#CCCCCC");
+    }
+    //鼠标离开内容
+    function changeBackColor_out(div) {
+        $(div).css("background-color","");
+    }
+    //将点击的内容放到搜索框
+    function setSearch_onclick(div) {
+        $("#search_input").val(div.innerText);
+        $("#show_find").show();
+    }
+</script>
 </body>
 </html>	

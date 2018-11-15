@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        阳光成单系统
+    </title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="css/x-admin.css" media="all">
+    <script src="lib/layui/layui.js" charset="utf-8"></script>
+    <script src="js/x-layui.js" charset="utf-8"></script>
+    <script src="js/vue.min.js"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../reception/style/js/jquery.1.10.1.min.js"></script>
+</head>
+<body>
+
+
+<div>
+    <center>基本信息</center>
+    <table class="layui-table">
+        <tr>
+            <th>简历头像</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>手机号码</th>
+            <th>邮箱</th>
+        </tr>
+        <tr th:each="obj,start:${list}">
+            <td>
+                <img th:src="'../reception/'+@{${obj.reimage}}"/>
+            </td>
+            <td>
+                <span th:text="${obj.rename}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.resex}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.reage}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.rephone}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.remail}"></span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <center>期望工作</center>
+    <table class="layui-table">
+        <tr>
+            <th>求职岗位</th>
+            <th>工作性质</th>
+            <th>求职薪资</th>
+            <th>工作地点</th>
+        </tr>
+        <tr th:each="obj,start:${list}">
+            <td>
+                <span th:text="${obj.inpositionid}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.inworknature}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.insalary}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.inworkaddress}"></span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <center>工作经历</center>
+    <table class="layui-table">
+        <tr>
+            <th>公司名称</th>
+            <th>所在职位</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
+            <th>工作描述</th>
+        </tr>
+        <tr th:each="obj,start:${list}">
+            <td>
+                <span th:text="${obj.wpcompanyname}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.wpinposition}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.wpstarttime}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.wpstopetime}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.wpworkdescribe}"></span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <center>项目经验</center>
+    <table class="layui-table">
+        <tr>
+            <th>项目名称</th>
+            <th>个人职责</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
+            <th>项目描述</th>
+        </tr>
+        <tr th:each="obj,start:${list}">
+            <td>
+                <span th:text="${obj.pjname}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.pjresponsibility}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.pjstarttime}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.pjstopetime}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.pjdescribe}"></span>
+            </td>
+
+        </tr>
+    </table>
+</div>
+
+<div>
+    <center>教育背景</center>
+    <table class="layui-table">
+        <tr>
+            <th>学校名称</th>
+            <th>学历</th>
+            <th>专业名称</th>
+            <th>开始年份</th>
+            <th>结束年份</th>
+        </tr>
+        <tr th:each="obj,start:${list}">
+            <td>
+                <span th:text="${obj.bename}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.beducation}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.bemajorname}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.bestarttime}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.bestopetime}"></span>
+            </td>
+        </tr>
+    </table>
+</div>
+<div>
+    <center>其它</center>
+    <table class="layui-table">
+        <tr>
+            <th>语种</th>
+            <th>听说能力</th>
+            <th>读写能力</th>
+            <th>自我评价</th>
+        </tr>
+        <tr th:each="obj,start:${list}">
+            <td>
+                <span th:text="${obj.language}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.insteringandspeak}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.literacy}"></span>
+            </td>
+            <td>
+                <span th:text="${obj.assessment}"></span>
+            </td>
+            <input type="hidden" id="reid" th:value="${obj.reid}" >
+        </tr>
+    </table>
+</div>
+<div>
+    <center><input type="button" class="layui-btn" id="btn" value="提交"/></center>
+</div>
+
+<script>
+    $("#btn").click(function(){
+        $.ajax({
+            url:"../resume/updateviewed",
+            type:"post",
+            data:{
+                reid:$("#reid").val()
+            },
+            success:function (data) {
+                if(data){
+                    alert("成功")
+                    window.location.href="../backstageone/AllResume.html";
+                }else{
+                    alert("失败")
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+
+</html>

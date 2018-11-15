@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
 </head>
 
 <body>
 <form id="fm">
     <div id="abc">
         <input type="hidden" :value="msg[0].wid" name="wid"/>
-        <table cellspacing="0" cellpadding="0" border="1" style="text-align: center">
+        <table class="layui-table">
             <caption>修改密码</caption>
             <tr>
                 <td>当前用户</td>
@@ -23,8 +25,8 @@
     </div>
 </form>
 <a id="sub">提交</a>
-<script src="js/jquery-1.9.1.js"></script>
-<script src="js/vue.min.js"></script>
+<script src="../js/jquery-1.9.1.js"></script>
+<script src="../js/vue.min.js"></script>
 <script>
     new Vue({
         el: '#abc',
@@ -44,7 +46,6 @@
             });
         }
     })
-
     $(function () {
         $('#sub').click(function () {
             $.ajax({
@@ -56,6 +57,8 @@
                     if (data == true) {
                         alert("修改成功！")
                         parent.location.href = 'login.html';
+                    }else {
+                        alert("修改失败");
                     }
                 }
             });

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,9 +10,50 @@
 
 </head>
 <body>
+<div th:text="${list}"></div>
+<div th:each="obj,start:${list}">
+    <span th:text="${obj.dwelladdress}"></span>
+</div>
+
+
+
+
+<div id="btn3">
+    <table border="1">
+        <tr>
+            <td>编号</td>
+            <td>名字</td>
+            <td>年龄</td>
+        </tr>
+        <tr v-for="z in x">
+            <td v-text="z.reid"></td>
+            <td v-text="z.resex"></td>
+            <td v-text="z.reage"></td>
+        </tr>
+    </table>
+</div>
+<script>
+    new Vue({
+        el: "#btn3",
+        data: {
+            x: []
+        },
+        created: function () {
+            var q = this;
+            $.ajax({
+                url:"description/queryAll",
+                type: "post",
+                success: function (data) {
+                    q.a = data
+                }
+            })
+        }
+    });
+</script>
+
 <!--1.办公室文员2.会计3.客服助理4.电话销售5.淘宝客服6.业务销售7.采购主管8.天猫运营-->
 
-<div id="btn">
+<!--<div id="btn">
 
 
     <div v-for="w in a">
@@ -95,7 +136,7 @@
             })
         }
     });
-</script>
+</script>-->
 
 
 </body>

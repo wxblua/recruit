@@ -5,18 +5,20 @@
     <title>Title</title>
     <script src="js/jquery-1.9.1.js"></script>
     <script src="js/vue.min.js"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
 </head>
 <body>
 
     <div id="adver">
         <a href="http://localhost:8080/recruit/webback/addadvertising.html">添加广告</a>
-        <table border="1">
+        <table class="layui-table">
             <tr>
                 <td>广告编号</td>
                 <td>广告标题</td>
                 <td>广告图片</td>
-                <td>创建时间</td>
-                <td>更新时间</td>
+                <!--<td>创建时间</td>
+                <td>更新时间</td>-->
                 <td>职位编号</td>
                 <td>操作</td>
             </tr>
@@ -24,12 +26,18 @@
                 <td>{{a.aid}}</td>
                 <td>{{a.atitle}}</td>
                 <td>{{a.aimage}}</td>
-                <td>{{a.createtime}}</td>
-                <td>{{a.updatetime}}</td>
+                <!--<td>{{a.createtime}}</td>
+                <td>{{a.updatetime}}</td>-->
                 <td>{{a.positionid}}</td>
                 <td>
-                    <button @click="getindex(a.aid)">删除</button>
-                    <button @click="update(a.aid)">修改</button>
+                    <div class="layui-btn-group">
+                        <button class="layui-btn layui-btn-sm" @click="update(a.aid)" value="修改">
+                            <i class="layui-icon">&#xe642;</i>
+                        </button>
+                        <button class="layui-btn layui-btn-sm" @click="getindex(a.aid)" value="删除">
+                            <i class="layui-icon">&#xe640;</i>
+                        </button>
+                    </div>
                 </td>
             </tr>
         </table>

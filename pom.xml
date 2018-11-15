@@ -112,6 +112,15 @@
 			<version>1.9</version>
 		</dependency>
 
+		<!--导出word文档-->
+		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.28</version>
+		</dependency>
+
+
 
 
 	</dependencies>

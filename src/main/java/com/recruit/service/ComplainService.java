@@ -1,6 +1,7 @@
 package com.recruit.service;
 
 import com.recruit.dao.ComplainDao;
+import com.recruit.entity.Complain;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,6 +22,11 @@ public class ComplainService {
     //删除投诉
     public int delcomplatin(Integer cid){
         return comdao.delcomplatin(cid);
+    }
+
+    //添加投诉
+    public int addcomplain(Complain complain){
+        return comdao.addcomplain(complain);
     }
 
 }

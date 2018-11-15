@@ -5,10 +5,12 @@
     <title>Title</title>
     <script src="js/vue.min.js"></script>
     <script src="js/jquery-1.9.1.js"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
 </head>
 <body>
 <div id="compla">
-    <table border="1">
+    <table class="layui-table">
         <tr>
             <td>投诉编号</td>
             <td>投诉内容</td>
@@ -22,11 +24,22 @@
             <td>{{c.cimage}}</td>
             <td>{{c.ctime}}</td>
             <td>
-                <a href="#">回复</a>||
-                <input type="button" @click="getindex(c.cid)" value="删除">
+                <div class="layui-btn-group">
+                    <button class="layui-btn layui-btn-sm" @click="add(c.cid)" value="回复">
+                        <i class="layui-icon">&#xe642;</i>
+                    </button>
+                    <button class="layui-btn layui-btn-sm" @click="del(c.cid)" value="删除">
+                        <i class="layui-icon">&#xe640;</i>
+                    </button>
+                </div>
             </td>
         </tr>
     </table>
+</div>
+<div id="hf" style="display: none;background-color: #0c9076;width: 300px;height: 200px;border: 0px solid red;position: relative;left: 407px;top: -450px;">
+    <input type="hidden" id="id"/><br/><br/>
+    回复内容<input type="text" id="name"/><br/><br/>
+    <input type="button" id="btn" value="提交"/>
 </div>
 </body>
 <script>
@@ -48,24 +61,62 @@
             });
         },
         methods:{
-          getindex(index){
-              $.ajax({
-                  url:"http://localhost:8080/recruit/complain/delcom",
-                  data:{
-                      cid:index
-                  },
-                  type:"post",
-                  success:function (data) {
-                      if(data==true){
-                          alert("删除成功")
-                          window.location.href="webback/queryComplain.html"
-                      }else{
-                          alert("删除失败")
-                      }
-                  }
-              })
-          }
-        },
+            getindex(index){
+                $.ajax({
+                    url:"http://localhost:8080/recruit/complain/delcom",
+                    data:{
+                        cid:index
+                    },
+                    type:"post",
+                    success:function (data) {
+                        if(data>0){
+                            alert("删除成功")
+                            window.location.href="queryComplain.html"
+                        }else{
+                            alert("删除失败")
+                        }
+                    }
+                })
+            },
+            add(index){
+                $('#id').val(index);
+                $('#hf').toggle();
+            },
+            del(index){
+                $.ajax({
+                    url:"http://localhost:8080/recruit/rep/updaterep",
+                    data:{
+                        cid:index
+                    },
+                    type:"post",
+                    success:function (data) {
+                        if(data==true){
+                            alert("删除成功")
+                            window.location.href="queryComplain.html"
+                        }else{
+                            alert("删除失败")
+                        }
+                    }
+                })
+            }
+        }
+    })
+    $('#btn').click(function () {
+        $.ajax({
+            url:"http://localhost:8080/recruit/rep/addrep",
+            type:"post",
+            dataType:"json",
+            data:{"cid":$('#id').val(),"rcontents":$('#name').val()},
+            success:function (data) {
+                if(data>0){
+                    alert("回复成功")
+                    $('#hf').hide();
+                }else{
+                    alert("回复失败")
+                    $('#hf').hide();
+                }
+            }
+        });
     })
 </script>
 </html>
