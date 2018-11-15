@@ -113,6 +113,7 @@ public class EnterpriseController {
         String emails=(String) session.getAttribute("list");
         int score=0;
         if(emails != null){
+
             List<Map<String,Object>> list1=enterpriseUservice.searchById(emails);
             score=Integer.parseInt(list1.get(0).get("epid").toString());
         }

@@ -137,7 +137,6 @@
 
                         $("#btn_part2").click(function(){
 
-                            alert($("#epemail").val()+" "+$("#phone").val()+" "+$("#password").val());
                             $.ajax({
                                 url:"../enterprise/addepinfo",
                                 data:{
@@ -231,7 +230,6 @@
                 <script>
                     $("#btn_part3").click(function () {
                         var epemail=$("#epemail").val();
-                        alert($("#emailes").val(epemail))
 
                         var b = $("#axb").serializeJSON();
                         alert(JSON.stringify(b));

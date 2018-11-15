@@ -5,10 +5,12 @@
     <title>Title</title>
     <script src="js/vue.min.js"></script>
     <script src="js/jquery-1.9.1.js"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
 </head>
 <body>
     <div id="users">
-        <table border="1">
+        <table class="layui-table">
             <tr>
                 <td>用户编号</td>
                 <td>用户邮箱</td>
@@ -35,23 +37,23 @@
     </div>
 </body>
 <script>
-    new Vue({
+                 new Vue({
         el:'#users',
         data:{
             msg:[]
         },
-        //回调，获取值
-        created:function () {
-            var admins=this;
-            $.ajax({
-                url:"../user/query",
-                type:"post",
-                dataType:"json",
-                success:function (data) {
-                    admins.msg=data
-                }
-            });
-        }
-    })
+//回调，获取值
+created:function () {
+var admins=this;
+$.ajax({
+url:"http://localhost:8080/recruit/user/query",
+type:"post",
+dataType:"json",
+success:function (data) {
+admins.msg=data
+}
+});
+}
+})
 </script>
 </html>

@@ -1,5 +1,7 @@
 package com.recruit.entity;
 
+import java.util.List;
+
 public class Resume {
 
     private Integer reid;
@@ -14,6 +16,8 @@ public class Resume {
     private String reimage;    //图片
     private Integer restate;    //简历状态
     private Integer userid;    //用户表外键
+
+    private List<Workexperience> workexperiences;
 
     public Integer getReid() {
         return reid;
@@ -109,5 +113,13 @@ public class Resume {
 
     public void setUserid(Integer userid) {
         this.userid = userid;
+    }
+
+    public List<Workexperience> getWorkexperiences() {
+        return workexperiences;
+    }
+
+    public void setWorkexperiences(List<Workexperience> workexperiences) {
+        this.workexperiences = workexperiences;
     }
 }

@@ -7,12 +7,15 @@
 	w		弹出层宽度（缺省调默认值）
 	h		弹出层高度（缺省调默认值）
 */
-function x_admin_show(title,url,w,h){
+function x_admin_show(title,url,data,w,h){
 	if (title == null || title == '') {
 		title=false;
 	};
 	if (url == null || url == '') {
 		url="404.html";
+	};
+	if (data == null || url == ''){
+        data=0;
 	};
 	if (w == null || w == '') {
 		w=800;
@@ -28,8 +31,10 @@ function x_admin_show(title,url,w,h){
 		shadeClose: true,
 		shade:0.4,
 		title: title,
-		content: url
+		content: url,
+        data:data
 	});
+alert(data)
 }
 
 /*关闭弹出框口*/

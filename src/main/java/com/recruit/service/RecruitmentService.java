@@ -21,9 +21,21 @@ public class RecruitmentService {
     public List<Map<String,Object>> searchrecruit(){
         return recruitmentDao.searchrecruit();
     }
+    /*根据id查询企业的信息*/
+    public List<Map<String,Object>> queryepid(Integer epid,Integer infoid){
+        return recruitmentDao.queryepid(epid,infoid);
+    }
+    /*查询该公司的所有职位*/
+    public List<Map<String,Object>> queryAllposition(Integer epid){
+        return recruitmentDao.queryAllposition(epid);
+    }
     /*新增招聘信息*/
     public boolean addRecruitment(Recruitment recruitment){
         return recruitmentDao.addRecruitment(recruitment);
+    }
+    /*根据epid查询公司的信息*/
+    public List<Map<String,Object>> queryAllenterprise(Integer epid){
+        return recruitmentDao.queryAllenterprise(epid);
     }
     /*查询职位类别表*/
     public List<Jobcategory> queryjobcategory(){
@@ -49,4 +61,19 @@ public class RecruitmentService {
     public Integer delrecruitment(Integer infoid){
         return recruitmentDao.delrecruitment(infoid);
     }
+
+    //自动补全
+    public List<Map<String,Object>> queryall(String introduction){
+        return recruitmentDao.queryall(introduction);
+    }
+
+    /**
+     * 按名称查询招聘信息
+     * @param name
+     * @return
+     */
+    public List<Map<String,Object>> queryAllRecruitmentByName(String name){
+        return recruitmentDao.queryAllRecruitmentByName(name);
+    }
+
 }

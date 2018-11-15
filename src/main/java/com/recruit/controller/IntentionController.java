@@ -17,8 +17,8 @@ public class IntentionController {
     IntentionService intentionService;
 
     @RequestMapping("query")
-    public List<Map<String, Object>> query(HttpSession session){
-        List<Map<String, Object>> list=intentionService.query(1);
+    public List<Map<String, Object>> query(HttpSession session,Integer reid){
+        List<Map<String, Object>> list=intentionService.query(reid);
         return list;
     }
 
@@ -29,6 +29,11 @@ public class IntentionController {
             fig=true;
         }
         return fig;
+    }
+
+    @RequestMapping("addIntention")
+    public Integer addIntention(String city,String positionType,String positionName,String salarys, Integer reid){
+        return intentionService.addIntention(positionType,city,positionName,salarys,reid);
     }
 
 }

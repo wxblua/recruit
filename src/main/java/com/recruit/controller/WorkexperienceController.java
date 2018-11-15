@@ -20,8 +20,8 @@ public class WorkexperienceController {
     WorkexperienceService workexperienceService;
 
     @RequestMapping("query")
-    public List<Map<String,Object>> query(HttpSession session){
-        List<Map<String, Object>> list=workexperienceService.query(1);
+    public List<Map<String,Object>> query(HttpSession session,Integer reid){
+        List<Map<String, Object>> list=workexperienceService.query(reid);
         return list;
     }
 
@@ -49,8 +49,33 @@ public class WorkexperienceController {
 
     /*添加工作经历*/
     @RequestMapping("addworkperi")
-    public Integer addworkperi(Workexperience workexperience){
-        return workexperienceService.addworkperi(workexperience);
+    public boolean addworkperi(String companyName,String positionName, String startYear,String startMonth,String endYear,String endMonth, String wpworkdescribe, Integer reid)throws Exception{
+        boolean fig=false;
+        String Year="";
+        String Month="";
+        Date date=null;
+        Date date1=null;
+        String wpcompanyname=companyName;
+        String wpinposition=positionName;
+        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-mm-dd");
+        if(startYear != null  && startMonth != null){
+            Year=startYear+"-"+startMonth+"-01";
+        }
+        if(endYear.equals("至今")){
+            Month=sdf.format(new Date());
+        }else if(endYear != null  && endMonth != null){
+            Month=endYear+"-"+endMonth+"-01";
+        }
+        if(workexperienceService.addworkperi(wpcompanyname,wpinposition,date=sdf.parse(Year),date1=sdf.parse(Month),wpworkdescribe,reid)>0){
+            fig=true;
+        }
+        return fig;
     }
+
+     /*删除工作经历*/
+     @RequestMapping("delworkperi")
+     public Integer delworkperi(Integer wpid){
+        return workexperienceService.delworkperi(wpid);
+     }
 
 }

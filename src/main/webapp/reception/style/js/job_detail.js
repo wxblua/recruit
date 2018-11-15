@@ -688,8 +688,9 @@ function errorTipsSet(msg){
  /************************
   * 简历上传功能 （文件）
   */
-function file_check(obj,action_url,id)
+function file_check(obj)
 {
+	alert(1)
 	$('#loadingImg').css("visibility","visible");
 	var obj = $('#' + id);
 	var userId = $('#userid').val();
@@ -710,9 +711,10 @@ function file_check(obj,action_url,id)
 	}else if(this.FileExt == ''){
 	 	return false;
 	}else{
+        alert(1);
 		$.ajaxFileUpload ({
 			type:'POST',
-			url: action_url,
+			url: '',
 			secureuri:false,
 			fileElementId:id,
 			data:{userId:userId},

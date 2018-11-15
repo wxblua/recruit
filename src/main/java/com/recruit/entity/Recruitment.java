@@ -1,5 +1,7 @@
 package com.recruit.entity;
 
+import java.util.Date;
+
 /**
  * 招聘信息表
  */
@@ -15,9 +17,10 @@ public class Recruitment {
     private String stcontent;/*岗位职责*/
     private String ricontent;/*任职要求*/
     private Integer rnumbers;/*招聘人数*/
-    private Integer cpwelfareid;/*公司福利*/
+    private String cpwelfareid;/*公司福利*/
     private Integer epid;/*企业公司编号*/
     private Integer restate;/*招聘状态*/
+    private Date fbtime;
     /**
      * 城市拼接
      */
@@ -113,11 +116,11 @@ public class Recruitment {
         this.rnumbers = rnumbers;
     }
 
-    public Integer getCpwelfareid() {
+    public String getCpwelfareid() {
         return cpwelfareid;
     }
 
-    public void setCpwelfareid(Integer cpwelfareid) {
+    public void setCpwelfareid(String cpwelfareid) {
         this.cpwelfareid = cpwelfareid;
     }
 
@@ -159,6 +162,14 @@ public class Recruitment {
 
     public void setDistrictl(String districtl) {
         this.districtl = districtl;
+    }
+
+    public Date getFbtime() {
+        return fbtime;
+    }
+
+    public void setFbtime(Date fbtime) {
+        this.fbtime = fbtime;
     }
 }
 

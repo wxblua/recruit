@@ -11,6 +11,7 @@ public class Workexperience {
     private Date wpstopetime;
     private String wpworkdescribe;
     private Integer reid;
+    private Resume resume;
 
     public Integer getWpid() {
         return wpid;
@@ -66,5 +67,13 @@ public class Workexperience {
 
     public void setReid(Integer reid) {
         this.reid = reid;
+    }
+
+    public Resume getResume() {
+        return resume;
+    }
+
+    public void setResume(Resume resume) {
+        this.resume = resume;
     }
 }

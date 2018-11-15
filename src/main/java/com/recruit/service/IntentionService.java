@@ -20,4 +20,8 @@ public class IntentionService {
     public int IntentionUPdate(String inpositionid, String inworkaddress, String inworknature, String insalary,Integer id){
         return intentionDao.IntentionUPdate(inpositionid,inworkaddress,inworknature,insalary,id);
     }
+
+    public Integer addIntention(String inworknature,String inworkaddress,String inpositionid,String insalary, Integer reid){
+        return intentionDao.addIntention(inworknature,inworkaddress,inpositionid,insalary,reid);
+    }
 }

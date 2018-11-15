@@ -29,6 +29,7 @@
     <script src="style/js/vue.min.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
 
 </head>
 <div id="body">
@@ -40,12 +41,11 @@
             <ul id="navheader" class="reset">
                 <li><a href="index.html">首页</a></li>
                 <li><a href="companylist.html">公司</a></li>
-                <li><a target="_blank" href="h/toForum.html">论坛</a></li>
                 <li class="current"><a rel="nofollow" href="jianli.html">我的简历</a></li>
             </ul>
             <dl class="collapsible_menu">
                 <dt>
-                    <span id="names"><p>{{name}}&nbsp;</p></span>
+                    <span id="names"><span v-for="nameAlias in nameParam">{{nameAlias}}</span></span>
                     <span class="red dn" id="noticeDot-0"></span>
                     <i></i>
                 </dt>
@@ -53,25 +53,23 @@
                     new Vue({
                         el: "#names",
                         data: {
-                            name: "",
+                            nameParam: "",
                         },
                         created: function () {
                             var sepl = this;
-                            $.post("user/share", {}, function (data) {
-                                this.name = data;
+                            $.post("../user/share", {}, function (data) {
+                                sepl.nameParam = data;
                             })
                         }
-                    })
-
+                    });
                 </script>
 
-
-                <dd><a rel="nofollow" href="jianli.html">我的简历</a></dd>
                 <dd><a href="collections.html">我收藏的职位</a></dd>
+                <dd><a href="delivery.html">我投递的职位</a></dd>
                 <dd class="btm"><a href="subscribe.html">我的订阅</a></dd>
                 <dd><a href="create.html">我要招人</a></dd>
                 <dd><a href="accountBind.html">帐号设置</a></dd>
-                <dd class="logout"><a rel="nofollow" href="login.html">退出</a></dd>
+                <dd class="logout"><a href="../user/usersession">退出</a></dd>
             </dl>
             <div class="dn" id="noticeTip">
                 <span class="bot"></span>
@@ -91,7 +89,7 @@
                             <span v-if="names.rename != null">{{names.rename}}</span>
                             <span v-if="names.rename == null">***</span>
                         </h1>
-                        <span class="rename">重命名</span> | <a target="_blank" href="h/resume/preview.html">预览</a>
+                        <span class="rename">重命名</span> | <a target="_blank" href="../reception/preview.html">预览</a>
                     </div>
                     <form class="fl dn" id="resumeNameForm">
                         <input type="text" v-for="names in name" id="resumeName" name="resumeName" class="nameEdit c9"
@@ -155,7 +153,6 @@
 								<span v-if="info.rephone != null">{{info.rephone}} |</span>
 								<span v-if="info.remail != null">{{info.remail}}<br></span>
 								<span v-if="info.jobhunter != null">{{info.jobhunter}}<br></span>
-
 							</span>
                         <div class="m_portrait">
                             <div></div>
@@ -330,6 +327,7 @@
             		<input v-for="info in ResumeInfo" type="hidden" id="currentStateVal" v-bind:value="info.jobhunter">
             		<input v-for="info in ResumeInfo" type="hidden" id="emailVal" v-bind:value="info.remail">
             		<input v-for="info in ResumeInfo" type="hidden" id="telVal" v-bind:value="info.rephone">
+                    <input v-for="info in ResumeInfo" type="hidden" id="reid" v-bind:value="info.reid">
 					</span>
 
                 </div>
@@ -352,33 +350,13 @@
 
                 <div class="profile_box" id="expectJob">
                     <h2>期望工作</h2>
-                    <span class="c_edit"></span>
+                    <span class="c_edit" id="updatewk" onclick="cli(this)"></span>
                     <div class="expectShow">
-            		            			<span id="intShow">
-												<p v-for="Inteninfo in Inten">
-													<span v-if="Inteninfo.inpositionid != null">{{Inteninfo.inpositionid}}  |  </span>
-													<span v-if="Inteninfo.inworknature != null">{{Inteninfo.inworknature}}  |  </span>
-													<span v-if="Inteninfo.insalary != null">{{Inteninfo.insalary}}  |  </span>
-													<span v-if="Inteninfo.inworkaddress != null">{{Inteninfo.inworkaddress}}</span>
-												</p>
-
-											</span>
-                        <script>
-                            new Vue({
-                                el: "#intShow",
-                                data: {
-                                    Inten: ""
-                                },
-                                created: function () {
-                                    var sepl = this;
-                                    $.post("../Intention/query", {}, function (data) {
-                                        sepl.Inten = data;
-                                    })
-                                }
-                            })
-                        </script>
+                        <span id="inpositionid"></span>
+                        <span id="inworknature"></span>
+                        <span id="insalary"></span>
+                        <span id="inworkaddress"></span>
                     </div><!--end .expectShow-->
-
                     <div class="expectEdit dn">
                         <form id="expectForm">
                             <table>
@@ -522,7 +500,8 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <input type="submit" value="保 存" class="btn_profile_save">
+                                        <input type="submit" class="layui-btn" value="修 改" id="bt" style="display: none;">
+                                        <input type="submit" value="保 存" id="ce" class="btn_profile_save">
                                         <a class="btn_profile_cancel" href="javascript:;">取 消</a>
                                     </td>
                                 </tr>
@@ -530,7 +509,7 @@
                             </table>
                         </form><!--end #expectForm-->
                     </div><!--end .expectEdit-->
-                    <div class="expectAdd pAdd dn">
+                    <div class="expectAdd pAdd" id="exp">
                         填写准确的期望工作能大大提高求职成功率哦…<br>
                         快来添加期望工作吧！
                         <span>添加期望工作</span>
@@ -539,29 +518,49 @@
             			<input type="hidden" v-for="Inre in Inten" id="expectJobVal" v-bind:value="Inre">
             			<input type="hidden" v-for="Inre in Inten" id="expectCityVal" v-bind:value="Inre.inworkaddress">
             			<input type="hidden" v-for="Inre in Inten" id="typeVal" v-bind:value="Inre.inworknature">
-            			<input type="hidden" v-for="Inre in Inten" id="expectPositionVal"
-                               v-bind:value="Inre.inpositionid">
+            			<input type="hidden" v-for="Inre in Inten" id="expectPositionVal"v-bind:value="Inre.inpositionid">
             			<input type="hidden" v-for="Inre in Inten" id="expectSalaryVal" v-bind:value="Inre.insalary">
-					<span>
-						<script>
-							new Vue({
+					</span>
+                    <script>
+                        $(function(){
+                            var reid=$("#reid").val()
+                            new Vue({
                                 el: "#intinfo",
                                 data: {
                                     Inten: ""
                                 },
                                 created: function () {
                                     var sepl = this;
-                                    $.post("../Intention/query", {}, function (data) {
+                                    $.post("../Intention/query?reid="+reid, {}, function (data) {
                                         sepl.Inten = data;
                                     })
                                 }
-                            })
-						</script>
+                            });
+                            $.ajax({
+                                url:'../Intention/query',
+                                data:{
+                                    reid:reid
+                                },
+                                dataType:"json",
+                                success:function(data) {
+                                    $("#inpositionid").html(data[0].inpositionid);
+                                    $("#inworknature").html(data[0].inworknature);
+                                    $("#insalary").html(data[0].insalary);
+                                    $("#inworkaddress").html(data[0].inworkaddress);
+                                    $("#exp").css("display","none");
+                                }
+                            });
+                        });
+                        function cli(param){
+                            $("#bt").css("display","inline-block");
+                            $("#ce").css("display","none");
+                            $("#select_expectCity").html("12");
+                        }
+                    </script>
                 </div><!--end #expectJob-->
 
                 <div class="profile_box" id="workExperience">
                     <h2>工作经历 <span> （投递简历时必填）</span></h2>
-
                     <div class="work"><span class="c_add"></span>
                         <span id="word">
 						<p v-for="worin in wor">
@@ -570,22 +569,45 @@
 							<span v-for="worin.wpstarttime"><span style="color: red">开始时间:</span>{{worin.wpstarttime}}</span><br/>
 							<span v-for="worin.wpstopetime"><span style="color: red">结束时间:</span>{{worin.wpstopetime}}</span><br/>
                             <span v-for="worin.wpworkdescribe">{{worin.wpworkdescribe}}</span>
+                            <span><input type="button" @click="delwork(worin.wpid)" value="删除"></span>
 						</p>
-					</span>
+					    </span>
                     </div>
                     <script>
-                        new Vue({
-                            el: "#word",
-                            data: {
-                                wor: "",
-                            },
-                            created: function () {
-                                var sple = this;
-                                $.post("../workexperience/query", {}, function (data) {
-                                    sple.wor = data;
-                                })
-                            }
-                        })
+                        $(function(){
+                            var reid=$("#reid").val();
+                            new Vue({
+                                el: "#word",
+                                data: {
+                                    wor: "",
+                                },
+                                created: function () {
+                                    var sple = this;
+                                    $.post("../workexperience/query?reid="+reid, {}, function (data) {
+                                        sple.wor = data;
+                                    })
+                                },
+                                methods:{
+                                    delwork(index){
+                                        $.ajax({
+                                            url:"../workexperience/delworkperi",
+                                            data:{
+                                                wpid:index
+                                            },
+                                            type:"post",
+                                            success:function (data) {
+                                                if(data){
+                                                    alert("删除成功");
+                                                    window.location="jianli.html";
+                                                }else{
+                                                    alert("删除失败");
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                            })
+                        });
 
                     </script>
                     <div class="experienceShow">
@@ -597,13 +619,13 @@
                                         <span class="redstar">*</span>
                                     </td>
                                     <td>
-                                        <input type="text" placeholder="公司名称" name="wpcompanyname" class="wpcompanyname">
+                                        <input type="text" placeholder="公司名称" name="companyName" class="companyName">
                                     </td>
                                     <td valign="top">
                                         <span class="redstar">*</span>
                                     </td>
                                     <td>
-                                        <input type="text" placeholder="职位名称，如：产品经理" name="wpinposition" class="wpinposition">
+                                        <input type="text" placeholder="职位名称，如：产品经理" name="positionName" class="positionName">
                                     </td>
                                 </tr>
                                 <tr>
@@ -786,16 +808,17 @@
                                         <div class="clear"></div>
                                     </td>
                                 </tr>
+
                                 <tr>
                                     <td valign="top"><span class="redstar">*</span></td>
                                     <td colspan="3">
-                                        <textarea placeholder="工作描述" name="wpworkdescribe"></textarea >
+                                        <textarea placeholder="工作描述" name="wpworkdescribess" id="wpworkdescribess"></textarea >
                                     </td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td colspan="3">
-                                        <input type="button" value="保 存" class="btn_profile_save" onclick="tijiao()">
+                                        <input type="submit" value="保 存" class="btn_profile_save">
                                         <a class="btn_profile_cancel" href="javascript:;">取 消</a>
                                     </td>
                                 </tr>
@@ -803,9 +826,6 @@
                             </table>
                             <input type="hidden" class="expId" value="">
                         </form><!--end .experienceForm-->
-                        <script>
-                            
-                        </script>
 
                         <ul class="wlist clearfix">
                         </ul>
@@ -1021,12 +1041,33 @@
                             <input type="hidden" class="expId" value="">
                         </form><!--end .experienceForm-->
                     </div><!--end .experienceEdit-->
-
-                    <div class="experienceAdd pAdd dn">
+                    <div class="experienceAdd pAdd">
                         工作经历最能体现自己的工作能力，<br>
                         且完善后才可投递简历哦！
                         <span>添加工作经历</span>
                     </div><!--end .experienceAdd-->
+                    <!--<span id="intinfo">
+            			<input type="hidden" v-for="Inre in Inten" id="expectJobVal" v-bind:value="Inre">
+            			<input type="hidden" v-for="Inre in Inten" id="expectCityVal" v-bind:value="Inre.inworkaddress">
+            			<input type="hidden" v-for="Inre in Inten" id="typeVal" v-bind:value="Inre.inworknature">
+            			<input type="hidden" v-for="Inre in Inten" id="expectPositionVal"v-bind:value="Inre.inpositionid">
+            			<input type="hidden" v-for="Inre in Inten" id="expectSalaryVal" v-bind:value="Inre.insalary">
+					</span>
+                    <script>
+                        new Vue({
+                            el: "#intinfo",
+                            data: {
+                                Inten: ""
+                            },
+                            created: function () {
+                                var sepl = this;
+                                $.post("../Intention/query", {}, function (data) {
+                                    sepl.Inten = data;
+                                })
+                            }
+                        })
+                    </script>-->
+
                 </div><!--end #workExperience-->
 
                 <div class="profile_box" id="projectExperience">
@@ -1035,27 +1076,51 @@
                     <div class="p_ro">
 					<span id="project">
 						<p v-for="pro in project">
-							<span v-if="pro.pjname != null">{{pro.pjname}} |</span>
-							<span v-if="pro.pjdescribe != null">{{pro.pjdescribe}} </span><br/>
+							<span v-if="pro.pjname != null">{{pro.pjname}}|</span>
+                            <span v-if="pro.pjresponsibility != null">{{pro.pjresponsibility}}</span><br/>
 							<span v-if="pro.pjstarttime != null"><span style="color: red">开始时间:</span>{{pro.pjstarttime}}</span><br>
 							<span v-if="pro.pjstopetime != null"><span style="color: red">结束时间:</span>{{pro.pjstopetime}} </span><br/>
-							<span v-if="pro.pjresponsibility != null">{{pro.pjresponsibility}}</span>
+							<span v-if="pro.pjdescribe != null">{{pro.pjdescribe}}</span>
+                            <span><input type="button" @click="delpro(pro.pjid)" value="删除"></span>
 						</p>
 					</span>
                     </div>
                     <script>
-                        new Vue({
-                            el: "#project",
-                            data: {
-                                project: []
-                            },
-                            created: function () {
-                                var sepl = this;
-                                $.post("../projectperience/query", {}, function (data) {
-                                    sepl.project = data;
-                                })
-                            }
-                        })
+                        $(function(){
+                            var reid=$("#reid").val()
+                            new Vue({
+                                el: "#project",
+                                data: {
+                                    project: []
+                                },
+                                created: function () {
+                                    var sepl = this;
+                                    $.post("../projectperience/query?reid="+reid, {}, function (data) {
+                                        sepl.project = data;
+                                    })
+                                },
+                                methods:{
+                                    delpro(index){
+                                        $.ajax({
+                                            url:"../projectperience/delprojectperi",
+                                            data:{
+                                                pjid:index
+                                            },
+                                            type:"post",
+                                            success:function (data) {
+                                                if(data){
+                                                    alert("删除成功");
+                                                    window.location="jianli.html";
+                                                }else{
+                                                    alert("删除失败");
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                            })
+                        });
+
                     </script>
                     <div class="projectShow dn">
                         <ul class="plist clearfix">
@@ -1070,13 +1135,13 @@
                                         <span class="redstar">*</span>
                                     </td>
                                     <td>
-                                        <input type="text" placeholder="项目名称" name="projectName" class="projectName">
+                                        <input type="text" placeholder="项目名称" name="pjname" class="pjname">
                                     </td>
                                     <td valign="top">
                                         <span class="redstar">*</span>
                                     </td>
                                     <td>
-                                        <input type="text" placeholder="担任职务，如：产品负责人" name="thePost" class="thePost">
+                                        <input type="text" placeholder="担任职务，如：产品负责人" name="pjresponsibilitys" class="pjresponsibilitys">
                                     </td>
                                 </tr>
                                 <tr>
@@ -1149,8 +1214,7 @@
                                                    name="projectMonthStart">
                                             <input type="button" value="开始月份"
                                                    class="profile_select_139 profile_select_normal select_projectMonthStart">
-                                            <div style="display: none;"
-                                                 class="box_projectMonthStart boxUpDown boxUpDown_139 dn">
+                                            <div style="display: none;" class="box_projectMonthStart boxUpDown boxUpDown_139 dn">
                                                 <ul>
                                                     <li>01</li>
                                                     <li>02</li>
@@ -1267,12 +1331,6 @@
                                         <div class="word_count">你还可以输入 <span>500</span> 字</div>
                                     </td>
                                 </tr>
-                                <!-- <tr>
-                                    <td colspan="2">
-                                        <textarea placeholder="职责描述" name="ResponsDescription" class="ResponsDescription s_textarea"></textarea>
-                                        <div class="word_count">你还可以输入 <span>500</span> 字</div>
-                                    </td>
-                                </tr> -->
                                 <tr>
                                     <td valign="top"></td>
                                     <td colspan="3">
@@ -1295,6 +1353,55 @@
                 <div class="profile_box" id="educationalBackground">
                     <h2>教育背景<span>（投递简历时必填）</span></h2>
                     <span class="c_add dn"></span>
+                    <span id="educations">
+                        <p v-for="eduAlias in eduParam">
+                            <!--<span v-for="eduAlias.beid">{{eduAlias.beid}}</span>-->
+                            <span v-for="eduAlias.bename">{{eduAlias.bename}}|</span>
+                            <span v-for="eduAlias.educationname">{{eduAlias.beducation}}|</span>
+                            <span v-for="eduAlias.bemajorname">{{eduAlias.bemajorname}}</span><br/>
+                            <span v-if="eduAlias.bestarttime != null"><span style="color: red">开始时间:</span>{{eduAlias.bestarttime}}</span><br>
+							<span v-if="eduAlias.bestopetime != null"><span style="color: red">结束时间:</span>{{eduAlias.bestopetime}} </span>
+                            <span><input type="button" @click="delbackedu(eduAlias.beid)" value="删除"></span>
+                        </p>
+                    </span>
+                    <script>
+                        $(function(){
+                           var reid=$("#reid").val();
+                            new Vue({
+                                el: "#educations",
+                                data: {
+                                    eduParam: []
+                                },
+                                created: function () {
+                                    var edu = this;
+                                    $.post("../backeducation/queryBackeducation?reid="+reid, {}, function (data) {
+                                        edu.eduParam = data;
+                                    })
+                                },
+                                methods:{
+                                    delbackedu(index){
+                                        $.ajax({
+                                            url:"../backeducation/delBackeducation",
+                                            data:{
+                                                beid:index
+                                            },
+                                            type:"post",
+                                            success:function (data) {
+                                                if(data){
+                                                    alert("删除成功");
+                                                    window.location="jianli.html";
+                                                }else{
+                                                    alert("删除失败");
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        });
+
+                    </script>
+
                     <div class="educationalShow dn">
                         <form class="educationalForm borderBtm dn">
                             <table>
@@ -1304,7 +1411,7 @@
                                         <span class="redstar">*</span>
                                     </td>
                                     <td>
-                                        <input type="text" placeholder="学校名称" name="schoolName" class="schoolName">
+                                        <input type="text" placeholder="学校名称" name="bename" class="bename">
                                     </td>
                                     <td valign="top">
                                         <span class="redstar">*</span>
@@ -1472,6 +1579,7 @@
                         <ul class="elist clearfix">
                         </ul>
                     </div><!--end .educationalShow-->
+
                     <div class="educationalEdit dn">
                         <form class="educationalForm">
                             <table>
@@ -1521,6 +1629,10 @@
                                             <div class="box_schoolYearStart boxUpDown boxUpDown_139 dn"
                                                  style="display: none;">
                                                 <ul>
+                                                    <li>2018</li>
+                                                    <li>2017</li>
+                                                    <li>2016</li>
+                                                    <li>2015</li>
                                                     <li>2014</li>
                                                     <li>2013</li>
                                                     <li>2012</li>
@@ -1537,35 +1649,6 @@
                                                     <li>2001</li>
                                                     <li>2000</li>
                                                     <li>1999</li>
-                                                    <li>1998</li>
-                                                    <li>1997</li>
-                                                    <li>1996</li>
-                                                    <li>1995</li>
-                                                    <li>1994</li>
-                                                    <li>1993</li>
-                                                    <li>1992</li>
-                                                    <li>1991</li>
-                                                    <li>1990</li>
-                                                    <li>1989</li>
-                                                    <li>1988</li>
-                                                    <li>1987</li>
-                                                    <li>1986</li>
-                                                    <li>1985</li>
-                                                    <li>1984</li>
-                                                    <li>1983</li>
-                                                    <li>1982</li>
-                                                    <li>1981</li>
-                                                    <li>1980</li>
-                                                    <li>1979</li>
-                                                    <li>1978</li>
-                                                    <li>1977</li>
-                                                    <li>1976</li>
-                                                    <li>1975</li>
-                                                    <li>1974</li>
-                                                    <li>1973</li>
-                                                    <li>1972</li>
-                                                    <li>1971</li>
-                                                    <li>1970</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -1576,6 +1659,10 @@
                                             <div class="box_schoolYearEnd  boxUpDown boxUpDown_139 dn"
                                                  style="display: none;">
                                                 <ul>
+                                                    <li>2018</li>
+                                                    <li>2017</li>
+                                                    <li>2016</li>
+                                                    <li>2015</li>
                                                     <li>2014</li>
                                                     <li>2013</li>
                                                     <li>2012</li>
@@ -1592,35 +1679,6 @@
                                                     <li>2001</li>
                                                     <li>2000</li>
                                                     <li>1999</li>
-                                                    <li>1998</li>
-                                                    <li>1997</li>
-                                                    <li>1996</li>
-                                                    <li>1995</li>
-                                                    <li>1994</li>
-                                                    <li>1993</li>
-                                                    <li>1992</li>
-                                                    <li>1991</li>
-                                                    <li>1990</li>
-                                                    <li>1989</li>
-                                                    <li>1988</li>
-                                                    <li>1987</li>
-                                                    <li>1986</li>
-                                                    <li>1985</li>
-                                                    <li>1984</li>
-                                                    <li>1983</li>
-                                                    <li>1982</li>
-                                                    <li>1981</li>
-                                                    <li>1980</li>
-                                                    <li>1979</li>
-                                                    <li>1978</li>
-                                                    <li>1977</li>
-                                                    <li>1976</li>
-                                                    <li>1975</li>
-                                                    <li>1974</li>
-                                                    <li>1973</li>
-                                                    <li>1972</li>
-                                                    <li>1971</li>
-                                                    <li>1970</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -1647,19 +1705,106 @@
                 </div><!--end #educationalBackground-->
 
                 <div class="profile_box" id="selfDescription">
-                    <h2>自我描述</h2>
+                    <h2>其它</h2>
                     <span class="c_edit dn"></span>
-                    <div class="descriptionShow dn">
+                    <div class="descriptionShow">
+                        <span id="others">
+                            <p v-for="otherAlias in otherParam">
+                                <span>{{otherAlias.language}}</span>
+                                <span>听说能力{{otherAlias.insteringandspeak}}</span>
+                                <!--<span v-if="otherAlias.insteringandspeak==2">听说能力良好</span>
+                                <span v-if="otherAlias.insteringandspeak==3">听说能力熟练</span>
+                                <span v-if="otherAlias.insteringandspeak==4">听说能力精通</span>-->
+                                <span>读写能力{{otherAlias.literacy}}</span><br/>
+                                <!--<span v-if="otherAlias.literacy==2">读写能力良好</span>
+                                <span v-if="otherAlias.literacy==3">读写能力熟练</span>
+                                <span v-if="otherAlias.literacy==4">读写能力精通</span><br/>-->
+                                <span style="color:red">自我描述：</span><span>{{otherAlias.assessment}}</span>
+                                <span><input type="button" @click="delother(otherAlias.otherid)" value="删除"></span>
 
+                            </p>
+                        </span>
+                        <script>
+                            $(function(){
+                                var reid=$("#reid").val()
+                                new Vue({
+                                    el: "#others",
+                                    data: {
+                                        otherParam: []
+                                    },
+                                    created: function () {
+                                        var oth = this;
+                                        $.post("../other/queryother?reid="+reid, {}, function (data) {
+                                            oth.otherParam = data;
+                                        })
+                                    },
+                                    methods:{
+                                        delother(index){
+                                            $.ajax({
+                                                url:"../other/delother",
+                                                data:{
+                                                    otherid:index
+                                                },
+                                                type:"post",
+                                                success:function (data) {
+                                                    if(data){
+                                                        alert("删除成功");
+                                                        window.location="jianli.html";
+                                                    }else{
+                                                        alert("删除失败");
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            })
+
+                        </script>
                     </div><!--end .descriptionShow-->
                     <div class="descriptionEdit dn">
                         <form class="descriptionForm">
                             <table>
                                 <tbody>
                                 <tr>
+                                    <td>语种</td>
+                                    <td>
+                                        <select name="lanuage" id="lanuage">
+                                            <option>英语</option>
+                                            <option>日语</option>
+                                            <option>法语</option>
+                                            <option>德语</option>
+                                            <option>俄语</option>
+                                            <option>韩语</option>
+                                            <option>西班牙语</option>
+                                            <option>葡萄牙语</option>
+                                            <option>阿拉伯语</option>
+                                            <option>意大利语</option>
+                                            <option>其它</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>听说能力</td>
+                                    <td>
+                                        <input type="radio" name="inster" value="一般"/>一般
+                                        <input type="radio" name="inster" value="良好"/>良好
+                                        <input type="radio" name="inster" value="熟练"/>熟练
+                                        <input type="radio" name="inster" value="精通"/>精通
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>听写能力</td>
+                                    <td>
+                                        <input type="radio" name="liter" value="一般"/>一般
+                                        <input type="radio" name="liter" value="良好"/>良好
+                                        <input type="radio" name="liter" value="熟练"/>熟练
+                                        <input type="radio" name="liter" value="精通"/>精通
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td colspan="2">
-                                        <textarea class="selfDescription s_textarea" name="selfDescription"
-                                                  placeholder=""></textarea>
+                                        <textarea placeholder="自我描述" name="selfDescription" ></textarea>
                                         <div class="word_count">你还可以输入 <span>500</span> 字</div>
                                     </td>
                                 </tr>
@@ -1672,6 +1817,12 @@
                                 </tbody>
                             </table>
                         </form><!--end .descriptionForm-->
+                        <script>
+                            /*$(".btn_profile_save").click(function () {
+
+                            });*/
+                        </script>
+
                     </div><!--end .descriptionEdit-->
                     <div class="descriptionAdd pAdd">
                         描述你的性格、爱好以及吸引人的经历等，<br>
@@ -1680,53 +1831,14 @@
                     </div><!--end .descriptionAdd-->
                 </div><!--end #selfDescription-->
 
-                <div class="profile_box" id="worksShow">
-                    <h2>作品展示</h2>
-                    <span class="c_add dn"></span>
-                    <div class="workShow dn">
-                        <ul class="slist clearfix">
-                        </ul>
-                    </div><!--end .workShow-->
-                    <div class="workEdit dn">
-                        <form class="workForm">
-                            <table>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="text" placeholder="请输入作品链接" name="workLink" class="workLink">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <textarea maxlength="100" class="workDescription s_textarea"
-                                                  name="workDescription" placeholder="请输入说明文字"></textarea>
-                                        <div class="word_count">你还可以输入 <span>100</span> 字</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="submit" value="保 存" class="btn_profile_save">
-                                        <a class="btn_profile_cancel" href="javascript:;">取 消</a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <input type="hidden" class="showId" value="">
-                        </form><!--end .workForm-->
-                    </div><!--end .workEdit-->
-                    <div class="workAdd pAdd">
-                        好作品会说话！<br>
-                        快来秀出你的作品打动企业吧！
-                        <span>添加作品展示</span>
-                    </div><!--end .workAdd-->
-                </div><!--end #worksShow-->
+
                 <input type="hidden" id="resumeId" value="268472">
             </div><!--end .content_l-->
             <div class="content_r">
                 <div class="mycenterR" id="myInfo">
                     <h2>我的信息</h2>
                     <a target="_blank" href="collections.html">我收藏的职位</a>
-                    <br>
+                    <br/>
                     <a target="_blank" href="subscribe.html">我订阅的职位</a>
                 </div><!--end #myInfo-->
 

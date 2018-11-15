@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
@@ -57,10 +58,12 @@ public class UserControer {
      */
     @RequestMapping("log")
     @ResponseBody
-    public boolean log(String email, String pwd, HttpSession session, Model model){
+    public boolean log(String email, String pwd, HttpSession session, Model model,HttpServletRequest request){
         boolean ble=false;
         if(use.log(email, pwd).size() == 1){
             session.setAttribute("email",email);
+            List<Map<String,Object>> list=use.log(email,pwd);
+            request.getSession().setAttribute("userid",list.get(0).get("useid"));
             ble=true;
         }
         return ble;
@@ -83,6 +86,14 @@ public class UserControer {
         List<Map<String,Object>> list=use.queryuser();
         m.addAttribute("list",list);
         return list;
+    }
+
+    /*退出登陆销毁session*/
+    @RequestMapping("usersession")
+    public String session(HttpSession session){
+        session.invalidate();
+        System.out.println(session);
+        return "redirect:../reception/login.html";
     }
 
 }

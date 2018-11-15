@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.recruit.dao.ResumeDao">
+
+  	<resultMap type="com.recruit.entity.Resume" id="resumemap">
+  		<id column="reid" property="reid"/>
+		<result column="rename" property="rename"/>
+		<result column="resex" property="resex"/>
+		<result column="reage" property="reage"/>
+		<result column="dwelladdress" property="dwelladdress"/>
+		<result column="jobhunter" property="jobhunter"/>
+		<result column="rexperience" property="rexperience"/>
+		<result column="rephone" property="rephone"/>
+		<result column="remail" property="remail"/>
+		<result column="reimage" property="reimage"/>
+		<result column="restate" property="restate"/>
+		<result column="userid" property="userid"/>
+		<collection property="workexperiences" ofType="com.recruit.entity.Workexperience">
+			<result column="wpid" property="wpid"/>
+			<result column="wpcompanyname" property="wpcompanyname"/>
+			<result column="wpinposition" property="wpinposition"/>
+			<result column="wpstarttime" property="wpstarttime"/>
+			<result column="wpstopetime" property="wpstopetime"/>
+			<result column="wpworkdescribe" property="wpworkdescribe"/>
+			<result column="reid" property="reid"/>
+		</collection>
+  	</resultMap>
+	<select id="test" resultMap="resumemap" >
+		select re.reid,re.`rename`,re.resex,re.reage,re.jobhunter,re.dwelladdress,re.rexperience,re.rephone,re.remail,re.reimage,re.restate,re.userid,re.epid,
+		wk.wpcompanyname,wk.wpinposition,wk.wpstarttime,wk.wpstopetime,wk.wpworkdescribe
+		from resume re
+		left join workexperience wk on re.reid=wk.reid
+		<!--select re.reid,re.`rename`,re.resex,re.reage,re.jobhunter,re.dwelladdress,re.rexperience,re.rephone,re.remail,re.reimage,re.restate,re.userid,re.epid,re.deliverstate,
+		it.inworknature,it.inworkaddress,it.inpositionid,it.insalary,
+		wk.wpcompanyname,wk.wpinposition,wk.wpstarttime,wk.wpstopetime,wk.wpworkdescribe,
+		pj.pjname,pj.pjstarttime,pj.pjstopetime,pj.pjdescribe,pj.pjresponsibility,
+		bd.bename,edu.educationname,bd.bemajorname,bd.bestarttime,bd.bestopetime,
+		ot.`language`,ot.insteringandspeak,ot.literacy,ot.assessment from resume re
+		left join intention it on re.reid=it.reid
+		left join workexperience wk on re.reid=wk.reid
+		left join projectperience pj on re.reid=pj.reid
+		left join backeducation bd on re.reid=bd.reid
+		left join other ot on re.reid=ot.reid
+		left join education edu on bd.beducation=edu.educationid where re.epid=#{epid}-->
+	</select>
+
+
+	<!--<select id="queryProducts" resultMap="productmaps">
+      select
+          pl.productLine,pl.textDescription,pl.htmlDescription,pl.image,
+
+          po.productCode,po.productName,po.productLine productLines,
+          po.productScale,po.productVendor,po.productDescription,
+          po.quantityInStock,po.buyPrice,po.MSRP
+      from
+          productlines pl
+          right join products po on pl.productline = po.productline
+      where
+          pl.productLine='Motorcycles'
+    </select>
+
+    <resultMap type="entity.Products" id="productmaps">
+            <result column="productCode" property="productCode"/>
+          <result column="productName" property="productName"/>
+          <result column="productLines" property="productLine"/>
+          <result column="productScale" property="productScale"/>
+          <result column="productVendor" property="productVendor"/>
+          <result column="productDescription" property="productDescription"/>
+          <result column="quantityInStock" property="quantityInStock"/>
+          <result column="buyPrice" property="buyPrice"/>
+          <result column="MSRP" property="MSRP"/>
+          <association property="productlines" javaType="entity.Productlines">
+              <id column="productLine" property="productLine"/>
+              <result column="textDescription" property="textDescription"/>
+              <result column="htmlDescription" property="htmlDescription"/>
+              <result column="image" property="image"/>
+          </association>
+    </resultMap>
+
+    <select id="queryProductlines2" resultMap="productmap2">
+      select
+          pl.productLine,pl.textDescription,pl.htmlDescription,pl.image
+      from
+          productlines pl
+      where
+          pl.productLine='Motorcycles'
+    </select>
+    <select id="queryProducts2" resultType="entity.Products">
+      select
+          po.productCode,po.productName,po.productLine,
+          po.productScale,po.productVendor,po.productDescription,
+          po.quantityInStock,po.buyPrice,po.MSRP
+      from products po where po.productLine=#{0}
+    </select>
+    <resultMap type="entity.Productlines" id="productmap2">
+        <id column="productLine" property="productLine"/>
+      <result column="textDescription" property="textDescription"/>
+      <result column="htmlDescription" property="htmlDescription"/>
+      <result column="image" property="image"/>
+      <collection property="products" ofType="entity.Products" select="queryProducts2" column="productLine">
+      </collection>
+    </resultMap>
+
+    <select id="queryProducts3" resultMap="productmap3">
+      select
+          po.productCode,po.productName,po.productLine,
+          po.productScale,po.productVendor,po.productDescription,
+          po.quantityInStock,po.buyPrice,po.MSRP
+      from products po where po.productLine='Motorcycles'
+    </select>
+    <select id="queryProductlines3" resultType="entity.Productlines" >
+      select
+          pl.productLine,pl.textDescription,pl.htmlDescription,pl.image
+      from
+          productlines pl
+      where
+          pl.productLine=#{0}
+    </select>
+    <resultMap type="entity.Products" id="productmap3">
+            <result column="productCode" property="productCode"/>
+          <result column="productName" property="productName"/>
+          <result column="productLines" property="productLine"/>
+          <result column="productScale" property="productScale"/>
+          <result column="productVendor" property="productVendor"/>
+          <result column="productDescription" property="productDescription"/>
+          <result column="quantityInStock" property="quantityInStock"/>
+          <result column="buyPrice" property="buyPrice"/>
+          <result column="MSRP" property="MSRP"/>
+          <association property="productlines" javaType="entity.Productlines" select="queryProductlines3" column="productLine">
+          </association>
+    </resultMap>-->
+</mapper>

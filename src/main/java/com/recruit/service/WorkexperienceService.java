@@ -23,8 +23,12 @@ public class WorkexperienceService {
         return workexperienceDao.workexperienceUpdate(wpcompanyname,wpinposition,wpstarttime,wpstopetime,id);
     }
     /*添加工作经历*/
-    public Integer addworkperi(Workexperience workexperience){
-        return workexperienceDao.addworkperi(workexperience);
+    public Integer addworkperi(String wpcompanyname, String wpinposition, Date wpstarttime, Date wpstopetime, String wpworkdescribe, Integer id){
+        return workexperienceDao.addworkperi(wpcompanyname,wpinposition,wpstarttime,wpstopetime,wpworkdescribe,id);
+    }
+    /*删除工作经历*/
+    public Integer delworkperi(Integer wpid){
+        return workexperienceDao.delworkperi(wpid);
     }
 
 }

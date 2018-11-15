@@ -120,7 +120,6 @@
 				$("#verifyYz").click(function() {
 					$("#time_box").text("60 s后可重发");
 					d._sendVerify()
-					alert(123456);
 					$.post("../enterprise/epphones",{
                         epphone:$("#phone").val()
 					},function(data){

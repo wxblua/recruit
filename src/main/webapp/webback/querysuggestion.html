@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <script src="js/jquery-1.9.1.js"></script>
+    <link rel="stylesheet" href="css/layui.css">
+</head>
+<body>
+<div id="suggest">
+    <table class="layui-table">
+        <tr>
+            <td>建议编号</td>
+            <td>建议内容</td>
+            <td>建议用户</td>
+            <td>建议时间</td>
+            <td>操作</td>
+        </tr>
+        <tr v-for="s in msg">
+            <td>{{s.sid}}</td>
+            <td>{{s.scontent}}</td>
+            <td>{{s.useid}}</td>
+            <td>{{s.createtime}}</td>
+           <td>
+                <div class="layui-btn-group">
+                        <button class="layui-btn layui-btn-sm" @click="getindex(s.sid)" value="删除">
+                            <i class="layui-icon">&#xe640;</i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+<script>
+    $(function () {
+        new Vue({
+            el:'#suggest',
+            data:{
+                msg:[]
+            },
+            //回调，获取值
+            created:function () {
+                var admins=this;
+                $.ajax({
+                    url:"http://localhost:8080/recruit/suggest/querysuggest",
+                    type:"post",
+                    dataType:"json",
+                    success:function (data) {
+                        admins.msg=data;
+                    }
+                })
+            },
+            methods:{
+                getindex(index){
+                    $.ajax({
+                        url:"http://localhost:8080/recruit/suggest/delsuggest",
+                        data:{
+                            sid:index
+                        },
+                        type:"post",
+                        success:function (data) {
+                            if(data==true){
+                                alert("删除成功")
+                                window.location.href="querysuggestion.html"
+                            }else{
+                                alert("删除失败")
+                            }
+                        }
+                    })
+                },
+            }
+        });
+     })
+</script>
+</html>

@@ -13,6 +13,8 @@
 	<link rel="stylesheet" type="text/css" href="common/bootstrap/css/bootstrap.css" media="all">
 	<link rel="stylesheet" type="text/css" href="common/global.css" media="all">
 	<link rel="stylesheet" type="text/css" href="css/personal.css" media="all">
+	<script src="../js/vue.min.js"></script>
+	<script src="../js/jquery-1.9.1.js"></script>
 </head>
 <body>
 <section class="layui-larry-box">
@@ -25,7 +27,7 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">用户名</label>
 					<div class="layui-input-block">  
-						<input type="text" name="title"  autocomplete="off"  class="layui-input layui-disabled" value="admin" disabled="disabled" >
+						<input type="text" name="title" autocomplete="off" class="layui-input layui-disabled" id="abc"  :value="msg[0].wname" disabled="disabled" >
 					</div>
 				</div>
 				<div class="layui-form-item">
@@ -98,8 +100,26 @@
               console.log(res) 
             } 
          });
-
 	});
+
+	new Vue({
+		el:"#abc",
+		data:{
+		    msg:[]
+		},
+		//回调，获取值
+		created:function () {
+			var admins=this;
+			$.ajax({
+				url:"http://localhost:8080/recruit/login/queryback",
+				type:"post",
+				dataType:"json",
+				success:function (data) {
+					admins.msg=data;
+                }
+			});
+        }
+	})
 </script>
 </body>
 </html>
